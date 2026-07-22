@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/shared/ThemeProvider"
+import { AuthProvider } from "@/components/shared/AuthProvider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import "./globals.css"
 
@@ -87,9 +88,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">
         <ThemeProvider>
-          <TooltipProvider>
-            {children}
-          </TooltipProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              {children}
+            </TooltipProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

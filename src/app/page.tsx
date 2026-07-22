@@ -86,12 +86,16 @@ export default function HomePage() {
  const [searchQuery, setSearchQuery] = useState("")
  const [testimonialIndex, setTestimonialIndex] = useState(0)
  const scrollRef = useRef<HTMLDivElement>(null)
-  const userCampaigns = useCampaignStore((s) => s.userCampaigns)
+  const { allCampaigns, fetchCampaigns, isLoading } = useCampaignStore()
 
-  const allCampaigns = [...userCampaigns.filter((c) => c.status === "active"), ...mockCampaigns]
- const featuredCampaigns = allCampaigns.filter((c) => c.featured)
- const trendingCampaigns = allCampaigns.filter((c) => c.trending)
- const recentCampaigns = [...allCampaigns].sort(
+  useEffect(() => {
+    fetchCampaigns()
+  }, [fetchCampaigns])
+
+  const activeCampaigns = allCampaigns.length > 0 ? allCampaigns : mockCampaigns
+ const featuredCampaigns = activeCampaigns.filter((c) => c.featured)
+ const trendingCampaigns = activeCampaigns.filter((c) => c.trending)
+ const recentCampaigns = [...activeCampaigns].sort(
  (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
  )
 
