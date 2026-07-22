@@ -388,7 +388,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
    <Separator className="mt-4" />
 
    {/* Step Content */}
-   <div className="relative min-h-[320px] overflow-hidden">
+   <div className="relative min-h-[320px] overflow-x-hidden">
     <AnimatePresence mode="wait" custom={direction}>
      {isSuccess ? (
       <motion.div
