@@ -671,10 +671,10 @@ export default function AdminCampaignsPage() {
                           </div>
                         ) : (
                           <DropdownMenu>
-                            <DropdownMenuTrigger
-                              render={<Button variant="ghost" size="icon-sm" />}
-                            >
-                              <MoreHorizontal className="h-4 w-4" />
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon-sm">
+                                <MoreHorizontal className="h-4 w-4" />
+                              </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                               {campaign.status === "pending" &&

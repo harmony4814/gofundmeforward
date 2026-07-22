@@ -59,7 +59,7 @@ export default function FAQPage() {
  ))}
  </TabsList>
 
- <Accordion>
+ <Accordion type="single" collapsible>
  {filteredFAQs.map((faq) => (
  <AccordionItem key={faq.id} value={faq.id}>
  <AccordionTrigger className="text-left">

@@ -262,14 +262,12 @@ export default function SettingsPage() {
  </CardHeader>
  <CardContent>
  <AlertDialog>
- <AlertDialogTrigger
- render={
+ <AlertDialogTrigger asChild>
  <Button variant="destructive">
  <Trash2 className="h-4 w-4" />
  Delete Account
  </Button>
- }
- />
+ </AlertDialogTrigger>
  <AlertDialogContent>
  <AlertDialogHeader>
  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

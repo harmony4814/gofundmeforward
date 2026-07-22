@@ -147,11 +147,11 @@ export default function AdminLayout({
       <div className="flex flex-1 flex-col overflow-hidden">
         <header className="flex h-14 shrink-0 items-center gap-4 border-b border-border bg-card px-4 lg:px-6">
           <Sheet>
-            <SheetTrigger
-              render={<Button variant="ghost" size="icon" className="lg:hidden" />}
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle sidebar</span>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="lg:hidden">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle sidebar</span>
+              </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-72 p-0">
               <SheetHeader className="border-b border-border px-4 py-3">
@@ -198,27 +198,29 @@ export default function AdminLayout({
             </Badge>
 
             <DropdownMenu>
-              <DropdownMenuTrigger
-                render={
-                  <button className="flex items-center gap-2 rounded-full p-1 transition-colors hover:bg-muted" />
-                }
-              >
-                <Avatar size="sm">
-                  <AvatarImage src="/avatars/admin.jpg" alt="Admin" />
-                  <AvatarFallback>A</AvatarFallback>
-                </Avatar>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-2 rounded-full p-1 transition-colors hover:bg-muted">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src="/avatars/admin.jpg" alt="Admin" />
+                    <AvatarFallback>A</AvatarFallback>
+                  </Avatar>
+                </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" sideOffset={8} className="w-56">
                 <DropdownMenuLabel>Admin Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem render={<Link href="/admin" className="flex items-center gap-2" />}>
-                    <LayoutDashboard className="h-4 w-4" />
-                    Dashboard
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin" className="flex items-center gap-2">
+                      <LayoutDashboard className="h-4 w-4" />
+                      Dashboard
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem render={<Link href="/admin/settings" className="flex items-center gap-2" />}>
-                    <Settings className="h-4 w-4" />
-                    Settings
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin/settings" className="flex items-center gap-2">
+                      <Settings className="h-4 w-4" />
+                      Settings
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />

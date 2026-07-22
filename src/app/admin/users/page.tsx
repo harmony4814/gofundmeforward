@@ -138,8 +138,10 @@ export default function AdminUsersPage() {
  </TableCell>
  <TableCell className="text-right">
  <DropdownMenu>
- <DropdownMenuTrigger render={<Button variant="ghost" size="icon-sm" />}>
+ <DropdownMenuTrigger asChild>
+ <Button variant="ghost" size="icon-sm">
  <MoreHorizontal className="h-4 w-4" />
+ </Button>
  </DropdownMenuTrigger>
  <DropdownMenuContent align="end">
  <DropdownMenuItem>
