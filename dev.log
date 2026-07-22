@@ -1,0 +1,486 @@
+
+> temp-next@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.20.10.6:3000
+✓ Ready in 1880ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\NSB EDITS\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\NSB EDITS\Desktop\programing class\MY WORK\donation website\package-lock.json
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /create-campaign 200 in 2.7s (next.js: 587ms, proxy.ts: 289ms, application-code: 1871ms)
+ GET / 200 in 1350ms (next.js: 114ms, proxy.ts: 21ms, application-code: 1215ms)
+[browser] Image with src "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0kddybx._.js:2477:13)
+✓ Compiled in 3.3s
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 889ms (next.js: 377ms, proxy.ts: 121ms, application-code: 391ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 1340ms (next.js: 626ms, proxy.ts: 196ms, application-code: 518ms)
+ GET / 200 in 1165ms (next.js: 413ms, proxy.ts: 20ms, application-code: 732ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 2.4s (next.js: 579ms, proxy.ts: 94ms, application-code: 1752ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+✓ Compiled in 627ms
+ GET / 200 in 2.7s (next.js: 1000ms, proxy.ts: 154ms, application-code: 1556ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+✓ Compiled in 1944ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 14.7s (next.js: 1457ms, proxy.ts: 156ms, application-code: 13.1s)
+ GET / 200 in 8.4s (next.js: 672ms, proxy.ts: 6.6s, application-code: 1158ms)
+ GET / 200 in 765ms (next.js: 82ms, proxy.ts: 53ms, application-code: 631ms)
+ GET / 200 in 758ms (next.js: 203ms, proxy.ts: 72ms, application-code: 483ms)
+ GET / 200 in 790ms (next.js: 524ms, proxy.ts: 57ms, application-code: 209ms)
+ GET / 200 in 793ms (next.js: 396ms, proxy.ts: 64ms, application-code: 333ms)
+ GET / 200 in 1144ms (next.js: 269ms, proxy.ts: 17ms, application-code: 857ms)
+ GET / 200 in 1093ms (next.js: 85ms, proxy.ts: 17ms, application-code: 991ms)
+ GET / 200 in 1053ms (next.js: 95ms, proxy.ts: 306ms, application-code: 653ms)
+ GET / 200 in 1070ms (next.js: 309ms, proxy.ts: 293ms, application-code: 468ms)
+ GET / 200 in 1062ms (next.js: 442ms, proxy.ts: 318ms, application-code: 301ms)
+ GET / 200 in 1062ms (next.js: 533ms, proxy.ts: 320ms, application-code: 209ms)
+ GET / 200 in 967ms (next.js: 82ms, proxy.ts: 22ms, application-code: 863ms)
+ GET / 200 in 976ms (next.js: 238ms, proxy.ts: 29ms, application-code: 709ms)
+ GET / 200 in 962ms (next.js: 187ms, proxy.ts: 162ms, application-code: 612ms)
+ GET / 200 in 984ms (next.js: 348ms, proxy.ts: 162ms, application-code: 473ms)
+ GET / 200 in 964ms (next.js: 436ms, proxy.ts: 161ms, application-code: 367ms)
+ GET / 200 in 967ms (next.js: 545ms, proxy.ts: 163ms, application-code: 259ms)
+ GET / 200 in 933ms (next.js: 217ms, proxy.ts: 49ms, application-code: 666ms)
+ GET / 200 in 961ms (next.js: 123ms, proxy.ts: 42ms, application-code: 796ms)
+ GET / 200 in 939ms (next.js: 290ms, proxy.ts: 57ms, application-code: 592ms)
+ GET / 200 in 933ms (next.js: 368ms, proxy.ts: 51ms, application-code: 514ms)
+ GET / 200 in 931ms (next.js: 498ms, proxy.ts: 53ms, application-code: 381ms)
+ GET / 200 in 936ms (next.js: 637ms, proxy.ts: 48ms, application-code: 250ms)
+ GET / 200 in 595ms (next.js: 183ms, proxy.ts: 25ms, application-code: 387ms)
+ GET / 200 in 586ms (next.js: 354ms, proxy.ts: 28ms, application-code: 204ms)
+ GET / 200 in 1299ms (next.js: 429ms, proxy.ts: 79ms, application-code: 791ms)
+ GET / 200 in 1304ms (next.js: 552ms, proxy.ts: 70ms, application-code: 682ms)
+ GET / 200 in 1273ms (next.js: 682ms, proxy.ts: 54ms, application-code: 536ms)
+ GET / 200 in 1343ms (next.js: 810ms, proxy.ts: 78ms, application-code: 455ms)
+ GET / 200 in 900ms (next.js: 45ms, proxy.ts: 497ms, application-code: 359ms)
+ GET / 200 in 906ms (next.js: 178ms, proxy.ts: 505ms, application-code: 222ms)
+ GET / 200 in 1052ms (next.js: 71ms, proxy.ts: 31ms, application-code: 950ms)
+ GET / 200 in 1046ms (next.js: 214ms, proxy.ts: 23ms, application-code: 808ms)
+ GET / 200 in 1045ms (next.js: 277ms, proxy.ts: 48ms, application-code: 720ms)
+ GET / 200 in 1044ms (next.js: 391ms, proxy.ts: 48ms, application-code: 605ms)
+ GET / 200 in 1002ms (next.js: 135ms, proxy.ts: 512ms, application-code: 354ms)
+ GET / 200 in 655ms (next.js: 277ms, proxy.ts: 171ms, application-code: 207ms)
+ GET / 200 in 317ms (next.js: 30ms, proxy.ts: 15ms, application-code: 271ms)
+ GET / 200 in 330ms (next.js: 150ms, proxy.ts: 16ms, application-code: 165ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 863ms (next.js: 211ms, proxy.ts: 113ms, application-code: 540ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 1384ms (next.js: 731ms, proxy.ts: 80ms, application-code: 572ms)
+ GET / 200 in 327ms (next.js: 40ms, proxy.ts: 97ms, application-code: 191ms)
+✓ Compiled in 3.7s
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+⨯ ReferenceError: ThemeProviderToggle is not defined
+    at Navbar (src\components\layout\Navbar.tsx:44:3)
+  42 |  <Search className="h-5 w-5" />
+  43 |  </button>
+> 44 |  <ThemeProviderToggle />
+     |   ^
+  45 |  <Link href="/login">
+  46 |  <Button variant="ghost" size="sm">
+  47 |  Log In {
+  digest: '517111166'
+}
+✓ Compiled in 4.1s
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 9.5s (next.js: 695ms, proxy.ts: 316ms, application-code: 8.5s)
+ GET / 200 in 852ms (next.js: 314ms, proxy.ts: 148ms, application-code: 391ms)
+ GET / 500 in 9.2s (next.js: 919ms, proxy.ts: 33ms, application-code: 8.3s)
+ GET /login?redirect=%2Fmanifest.json 200 in 2.4s (next.js: 340ms, proxy.ts: 19ms, application-code: 2.1s)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+[browser] Uncaught ReferenceError: ThemeProviderToggle is not defined
+    at Navbar (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_1o7mxp4._.js:1860:297)
+    at Object.react_stack_bottom_frame (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:15037:24)
+    at renderWithHooks (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6081:21)
+    at beginWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9555:97)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64)
+    at HomePage (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_1o7mxp4._.js:2491:280)
+    at ClientPageRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0vvjw1t._.js:4688:50)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+⨯ ReferenceError: ThemeProviderToggle is not defined
+    at Navbar (src\components\layout\Navbar.tsx:57:3)
+  55 |
+  56 |  <div className="flex items-center gap-1 md:hidden">
+> 57 |  <ThemeProviderToggle />
+     |   ^
+  58 |  <button
+  59 |  onClick={() => setMobileOpen(!mobileOpen)}
+  60 |  className="rounded-lg p-2 text-gray-500" {
+  digest: '3123935573'
+}
+ GET /? 500 in 1231ms (next.js: 185ms, proxy.ts: 67ms, application-code: 979ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+[browser] Uncaught ReferenceError: ThemeProviderToggle is not defined
+    at Navbar (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_1o7mxp4._.js:1860:297)
+    at Object.react_stack_bottom_frame (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:15037:24)
+    at renderWithHooks (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6081:21)
+    at beginWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9555:97)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64)
+    at HomePage (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_1o7mxp4._.js:2491:280)
+    at ClientPageRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0vvjw1t._.js:4688:50)
+✓ Compiled in 291ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 1965ms (next.js: 283ms, proxy.ts: 79ms, application-code: 1603ms)
+ GET /login?redirect=%2Fmanifest.json 200 in 787ms (next.js: 133ms, proxy.ts: 65ms, application-code: 590ms)
+[browser] Image with src "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0kddybx._.js:2477:13)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /create-campaign 200 in 499ms (next.js: 347ms, proxy.ts: 7ms, application-code: 145ms)
+ GET /create-campaign 200 in 1261ms (next.js: 16ms, proxy.ts: 25ms, application-code: 1219ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 1529ms (next.js: 1143ms, proxy.ts: 8ms, application-code: 377ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 626ms (next.js: 164ms, proxy.ts: 106ms, application-code: 356ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 627ms (next.js: 65ms, proxy.ts: 37ms, application-code: 525ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 467ms (next.js: 30ms, proxy.ts: 12ms, application-code: 424ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 270ms (next.js: 38ms, proxy.ts: 10ms, application-code: 222ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 603ms (next.js: 133ms, proxy.ts: 60ms, application-code: 410ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 319ms (next.js: 24ms, proxy.ts: 9ms, application-code: 287ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 1889ms (next.js: 1016ms, proxy.ts: 9ms, application-code: 864ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 684ms (next.js: 69ms, proxy.ts: 86ms, application-code: 529ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 421ms (next.js: 38ms, proxy.ts: 11ms, application-code: 372ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 419ms (next.js: 172ms, proxy.ts: 13ms, application-code: 235ms)
+[browser] Uncaught TypeError: Failed to construct 'Image': Please use the 'new' operator, this DOM object constructor cannot be called as a function.
+    at Object.react_stack_bottom_frame (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:15037:24)
+    at renderWithHooks (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6081:21)
+    at beginWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9555:97)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performSyncWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10179:316)
+    at processRootScheduleInMicrotask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10200:106)
+    at <unknown> (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10274:158)
+    at CampaignHero (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_1fd4-oo._.js?id=%255Bproject%255D%252FDesktop%252Fprograming+class%252FMY+WORK%252Fdonation+website%252Fsrc%252Fcomponents%252Fshared%252FCampaignDetailComponents.tsx+%255Bapp-client%255D+%2528ecmascript%2529:452:306)
+    at CampaignDetailPage (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_1fd4-oo._.js:5129:280)
+    at ClientPageRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0vvjw1t._.js:4688:50)
+✓ Compiled in 230ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performSyncWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10179:316)
+    at flushSyncWork$1 (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9230:86)
+    at Object.scheduleRefresh (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:299:13)
+    at <unknown> (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:391:33)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:384:38)
+    at applyUpdate (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:878:31)
+    at <unknown> (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:886:13) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 404 in 2.0s (next.js: 824ms, proxy.ts: 68ms, application-code: 1129ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+✓ Compiled in 236ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 200 in 482ms (next.js: 196ms, proxy.ts: 56ms, application-code: 230ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 404 in 1080ms (next.js: 36ms, proxy.ts: 7ms, application-code: 1037ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 404 in 400ms (next.js: 29ms, proxy.ts: 11ms, application-code: 361ms)
+ GET /login?redirect=%2Fmanifest.json 200 in 630ms (next.js: 70ms, proxy.ts: 6ms, application-code: 553ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 404 in 397ms (next.js: 31ms, proxy.ts: 15ms, application-code: 351ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 404 in 533ms (next.js: 19ms, proxy.ts: 17ms, application-code: 496ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+ GET /campaigns/in-honor-of-eric-dane-mrw0ctl2 404 in 767ms (next.js: 29ms, proxy.ts: 13ms, application-code: 725ms)
+ GET /login?redirect=%2Fmanifest.json 200 in 437ms (next.js: 30ms, proxy.ts: 7ms, application-code: 400ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 1710ms (next.js: 191ms, proxy.ts: 14ms, application-code: 1505ms)
+[browser] Image with src "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0kddybx._.js:2477:13)
+✓ Compiled in 691ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 892ms (next.js: 286ms, proxy.ts: 228ms, application-code: 378ms)
+ GET /create-campaign 200 in 247ms (next.js: 72ms, proxy.ts: 8ms, application-code: 167ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 225ms (next.js: 53ms, proxy.ts: 7ms, application-code: 165ms)
+✓ Compiled in 499ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 1028ms (next.js: 426ms, proxy.ts: 132ms, application-code: 470ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 1059ms (next.js: 460ms, proxy.ts: 50ms, application-code: 549ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 394ms (next.js: 84ms, proxy.ts: 16ms, application-code: 295ms)
+✓ Compiled in 274ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 1193ms (next.js: 240ms, proxy.ts: 67ms, application-code: 886ms)
+✓ Compiled in 1085ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 998ms (next.js: 221ms, proxy.ts: 169ms, application-code: 609ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 713ms (next.js: 40ms, proxy.ts: 13ms, application-code: 659ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 388ms (next.js: 44ms, proxy.ts: 20ms, application-code: 324ms)
+✓ Compiled in 317ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /campaigns/in-honor-of-eric-dane-mrw120i3 200 in 1088ms (next.js: 503ms, proxy.ts: 80ms, application-code: 506ms)
+✓ Compiled in 1743ms
+ GET /login 200 in 270ms (next.js: 75ms, proxy.ts: 11ms, application-code: 184ms)
+ GET /admin 200 in 378ms (next.js: 124ms, proxy.ts: 10ms, application-code: 245ms)
+ GET /avatars/admin.jpg 404 in 1353ms (next.js: 341ms, application-code: 1012ms)
+○ Compiling /admin/donations ...
+ GET /admin/donations 200 in 5.4s (next.js: 5.2s, proxy.ts: 7ms, application-code: 144ms)
+✓ Compiled in 259ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/donations 200 in 396ms (next.js: 140ms, proxy.ts: 66ms, application-code: 191ms)
+✓ Compiled in 357ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/donations 200 in 1153ms (next.js: 130ms, proxy.ts: 86ms, application-code: 936ms)
+✓ Compiled in 998ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/donations 200 in 535ms (next.js: 121ms, proxy.ts: 72ms, application-code: 341ms)
+ GET /admin/donations 200 in 219ms (next.js: 22ms, proxy.ts: 6ms, application-code: 192ms)
+ GET /admin/donations 200 in 118ms (next.js: 12ms, proxy.ts: 13ms, application-code: 93ms)
+✓ Compiled in 327ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/donations 200 in 804ms (next.js: 211ms, proxy.ts: 104ms, application-code: 489ms)
+○ Compiling /admin/campaigns ...
+ GET /admin/campaigns 200 in 3.7s (next.js: 3.5s, proxy.ts: 15ms, application-code: 217ms)
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at useMenuGroupRootContext (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_1syjt8a._.js:6564:15)
+    at MenuGroupLabel (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_1syjt8a._.js:6631:295)
+    at Object.react_stack_bottom_frame (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:15037:24)
+    at renderWithHooks (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:4620:24)
+    at updateForwardRef (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:5908:21)
+    at beginWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6766:24)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9555:97)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9098:47)
+    at performSyncWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10179:316)
+    at processRootScheduleInMicrotask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10200:106)
+    at <unknown> (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10274:158)
+    at DropdownMenuLabel (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_156_ei1._.js:753:279)
+    at AdminLayout (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_156_ei1._.js:1430:320)
+    at ClientSegmentRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0vvjw1t._.js:4737:50)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 1093ms (next.js: 178ms, proxy.ts: 15ms, application-code: 900ms)
+ GET /login 200 in 450ms (next.js: 71ms, proxy.ts: 8ms, application-code: 371ms)
+○ Compiling /dashboard ...
+ GET /dashboard 200 in 4.4s (next.js: 4.0s, proxy.ts: 8ms, application-code: 376ms)
+ GET /avatars/sarah.jpg 404 in 1299ms (next.js: 278ms, application-code: 1021ms)
+ GET /avatars/user.jpg 404 in 1319ms (next.js: 117ms, application-code: 1202ms)
+ GET /avatars/mike.jpg 404 in 1857ms (next.js: 706ms, application-code: 1151ms)
+ GET /avatars/emily.jpg 404 in 1859ms (next.js: 878ms, application-code: 981ms)
+ GET /avatars/david.jpg 404 in 878ms (next.js: 141ms, application-code: 737ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /dashboard 200 in 1204ms (next.js: 98ms, proxy.ts: 141ms, application-code: 965ms)
+ GET /dashboard 200 in 798ms (next.js: 22ms, proxy.ts: 8ms, application-code: 767ms)
+ GET /dashboard 200 in 606ms (next.js: 20ms, proxy.ts: 15ms, application-code: 571ms)
+ GET /dashboard/campaigns 200 in 2.9s (next.js: 2.8s, proxy.ts: 7ms, application-code: 112ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /dashboard/campaigns 200 in 877ms (next.js: 155ms, proxy.ts: 127ms, application-code: 595ms)
+ GET /dashboard/campaigns 200 in 353ms (next.js: 41ms, proxy.ts: 16ms, application-code: 296ms)
+ GET /dashboard/campaigns 200 in 236ms (next.js: 39ms, proxy.ts: 25ms, application-code: 172ms)
+ GET /dashboard 200 in 264ms (next.js: 30ms, proxy.ts: 8ms, application-code: 226ms)
+ GET /avatars/emily.jpg 404 in 1473ms (next.js: 460ms, application-code: 1013ms)
+ GET /avatars/sarah.jpg 404 in 1499ms (next.js: 354ms, application-code: 1145ms)
+ GET /avatars/mike.jpg 404 in 1483ms (next.js: 164ms, application-code: 1319ms)
+ GET /avatars/david.jpg 404 in 1465ms (next.js: 1251ms, application-code: 214ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /dashboard 200 in 881ms (next.js: 134ms, proxy.ts: 64ms, application-code: 682ms)
+○ Compiling /dashboard/notifications ...
+ GET /dashboard/notifications 200 in 4.5s (next.js: 4.1s, proxy.ts: 10ms, application-code: 396ms)
+ GET /dashboard/notifications 200 in 473ms (next.js: 190ms, proxy.ts: 7ms, application-code: 275ms)
+ GET /dashboard 200 in 1639ms (next.js: 7ms, proxy.ts: 8ms, application-code: 1623ms)
+ GET /avatars/sarah.jpg 404 in 3.5s (next.js: 310ms, application-code: 3.2s)
+ GET /avatars/emily.jpg 404 in 3.5s (next.js: 1859ms, application-code: 1598ms)
+ GET /avatars/david.jpg 404 in 3.5s (next.js: 1518ms, application-code: 1940ms)
+ GET /avatars/mike.jpg 404 in 3.5s (next.js: 1319ms, application-code: 2.2s)
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at useMenuGroupRootContext (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_0k7f29z._.js:5785:15)
+    at MenuGroupLabel (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_0k7f29z._.js:5852:295)
+    at Object.react_stack_bottom_frame (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:15037:24)
+    at renderWithHooks (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:4620:24)
+    at updateForwardRef (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:5908:21)
+    at beginWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6766:24)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9555:97)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9098:47)
+    at performSyncWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10179:316)
+    at processRootScheduleInMicrotask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10200:106)
+    at <unknown> (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10274:158)
+    at DropdownMenuLabel (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_0dnzr08._.js:508:279)
+    at DashboardLayout (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_0dnzr08._.js:1327:320)
+    at ClientSegmentRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0vvjw1t._.js:4737:50)
+ GET / 200 in 1154ms (next.js: 54ms, proxy.ts: 17ms, application-code: 1083ms)
+ GET /login?redirect=%2Fmanifest.json 200 in 968ms (next.js: 46ms, proxy.ts: 7ms, application-code: 915ms)
+[browser] Image with src "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0kddybx._.js:2477:13)
+ GET /campaigns/earthquake-relief-for-turkey 200 in 547ms (next.js: 91ms, proxy.ts: 9ms, application-code: 447ms)
+ GET /login 200 in 146ms (next.js: 10ms, proxy.ts: 7ms, application-code: 130ms)
+ GET /admin 200 in 254ms (next.js: 69ms, proxy.ts: 8ms, application-code: 177ms)
+ GET /avatars/admin.jpg 404 in 243ms (next.js: 19ms, application-code: 224ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/campaigns 200 in 342ms (next.js: 152ms, proxy.ts: 5ms, application-code: 186ms)
+✓ Compiled in 2.2s
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/campaigns 200 in 1186ms (next.js: 409ms, proxy.ts: 205ms, application-code: 572ms)
+ GET /admin/campaigns 200 in 444ms (next.js: 29ms, proxy.ts: 6ms, application-code: 409ms)
+ GET /admin/campaigns 200 in 295ms (next.js: 29ms, proxy.ts: 17ms, application-code: 249ms)
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at useMenuGroupRootContext (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_1syjt8a._.js:6564:15)
+    at MenuGroupLabel (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_1syjt8a._.js:6631:295)
+    at Object.react_stack_bottom_frame (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:15037:24)
+    at renderWithHooks (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:4620:24)
+    at updateForwardRef (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:5908:21)
+    at beginWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6766:24)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9555:97)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9098:47)
+    at performSyncWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10179:316)
+    at processRootScheduleInMicrotask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10200:106)
+    at <unknown> (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10274:158)
+    at DropdownMenuLabel (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_156_ei1._.js:753:279)
+    at AdminLayout (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/Desktop_programing%20class_MY%20WORK_donation%20website_src_156_ei1._.js:1430:320)
+    at ClientSegmentRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0vvjw1t._.js:4737:50)
+ GET /admin 200 in 583ms (next.js: 147ms, proxy.ts: 68ms, application-code: 368ms)
+ GET / 200 in 2.7s (next.js: 116ms, proxy.ts: 9ms, application-code: 2.6s)
+ GET /login?redirect=%2Fmanifest.json 200 in 846ms (next.js: 108ms, proxy.ts: 14ms, application-code: 724ms)
+[browser] Image with src "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0kddybx._.js:2477:13)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 736ms (next.js: 316ms, proxy.ts: 133ms, application-code: 287ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 563ms (next.js: 258ms, proxy.ts: 57ms, application-code: 248ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 404ms (next.js: 182ms, proxy.ts: 64ms, application-code: 157ms)
+✓ Compiled in 1505ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 487ms (next.js: 157ms, proxy.ts: 51ms, application-code: 280ms)
+ GET / 200 in 174ms (next.js: 6ms, proxy.ts: 31ms, application-code: 137ms)
+ GET / 200 in 89ms (next.js: 12ms, proxy.ts: 6ms, application-code: 71ms)
+✓ Compiled in 242ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 490ms (next.js: 260ms, proxy.ts: 46ms, application-code: 185ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /create-campaign 200 in 681ms (next.js: 488ms, proxy.ts: 14ms, application-code: 178ms)
+ GET /login 200 in 206ms (next.js: 67ms, proxy.ts: 6ms, application-code: 133ms)
+ GET /admin 200 in 212ms (next.js: 70ms, proxy.ts: 8ms, application-code: 133ms)
+ GET /avatars/admin.jpg 404 in 238ms (next.js: 51ms, application-code: 187ms)
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /admin/campaigns 200 in 291ms (next.js: 162ms, proxy.ts: 5ms, application-code: 124ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw3lkb5 200 in 310ms (next.js: 140ms, proxy.ts: 6ms, application-code: 164ms)
+ GET / 200 in 44ms (next.js: 7ms, proxy.ts: 4ms, application-code: 32ms)
+ GET /campaigns/in-honor-of-eric-dane-mrw3lkb5 404 in 1124ms (next.js: 24ms, proxy.ts: 10ms, application-code: 1090ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9557:28)
+    at workLoopSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9449:40)
+    at renderRootSync (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_03kfgvu._.js:2647:64) (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_compiled_react-dom_0o25fz5._.js:6945:102)
+ GET / 200 in 457ms (next.js: 11ms, proxy.ts: 10ms, application-code: 435ms)
+ GET /login?redirect=%2Fmanifest.json 200 in 450ms (next.js: 12ms, proxy.ts: 13ms, application-code: 424ms)
+[browser] Image with src "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. (file://C:/Users/NSB EDITS/Desktop/programing class/MY WORK/donation website/.next/dev/static/chunks/0206_next_dist_0kddybx._.js:2477:13)
+✓ Compiled in 1264ms
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 1127ms (next.js: 308ms, proxy.ts: 185ms, application-code: 634ms)
+ GET / 200 in 420ms (next.js: 8ms, proxy.ts: 7ms, application-code: 405ms)
+ GET / 200 in 429ms (next.js: 36ms, proxy.ts: 31ms, application-code: 362ms)
+ GET / 200 in 435ms (next.js: 114ms, proxy.ts: 31ms, application-code: 290ms)
+ GET / 200 in 414ms (next.js: 168ms, proxy.ts: 22ms, application-code: 224ms)
+ GET / 200 in 423ms (next.js: 222ms, proxy.ts: 24ms, application-code: 177ms)
+ GET / 200 in 126ms (next.js: 15ms, proxy.ts: 6ms, application-code: 106ms)
+ GET / 200 in 126ms (next.js: 35ms, proxy.ts: 24ms, application-code: 66ms)
