@@ -1,7 +1,7 @@
 "use client"
 
 import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { persist, createJSONStorage } from "zustand/middleware"
 import type { CampaignData } from "@/lib/data"
 
 interface CampaignStoreState {
@@ -35,6 +35,10 @@ export const useCampaignStore = create<CampaignStoreState>()(
     }),
     {
       name: "fundrise-campaigns",
+      storage: createJSONStorage(() => {
+        if (typeof window !== "undefined") return localStorage
+        return { getItem: () => null, setItem: () => {}, removeItem: () => {} }
+      }),
     }
   )
 )
