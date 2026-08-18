@@ -19,9 +19,10 @@ export async function GET(request: NextRequest) {
 
     let query = supabase
       .from("campaigns")
-      .select("*, user:profiles(display_name, avatar), category:categories(name, slug, icon)", {
-        count: "exact",
-      })
+      .select(
+        "*, user:profiles!campaigns_user_id_fkey(display_name, avatar), category:categories(name, slug, icon)",
+        { count: "exact" }
+      )
       .range(offset, offset + limit - 1);
 
     if (category) {
@@ -97,6 +98,38 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+
+    let categoryId: string | null = null;
+    if (data.categoryId) {
+      categoryId = data.categoryId;
+    } else if (data.category) {
+      const { data: categoryRow } = await admin
+        .from("categories")
+        .select("id")
+        .eq("slug", data.category)
+        .single();
+      categoryId = categoryRow?.id ?? null;
+    }
+
+    const beneficiaryMap: Record<string, string> = {
+      myself: "self",
+      friend: "someone_else",
+      charity: "charity",
+      business: "someone_else",
+      other: "someone_else",
+    };
+    const beneficiaryType =
+      beneficiaryMap[data.beneficiaryType] ?? data.beneficiaryType;
+
+    const {
+      data: { user: authUser },
+    } = await supabase.auth.getUser();
+
+    const isAdmin =
+      authUser &&
+      (await admin.auth.admin.getUserById(authUser.id)).data.user?.app_metadata
+        ?.role === "admin";
+
     let slug = slugify(data.title);
 
     const { data: existing } = await admin
@@ -120,15 +153,15 @@ export async function POST(request: NextRequest) {
         goal: data.goal,
         raised: 0,
         currency: data.currency,
-        category_id: data.categoryId,
+        category_id: categoryId,
         country: data.country,
-        beneficiary_type: data.beneficiaryType,
+        beneficiary_type: beneficiaryType,
         beneficiary_name: data.beneficiaryName,
         cover_image: data.coverImage,
         gallery_images: data.galleryImages ?? [],
         video_url: data.videoUrl ?? null,
         deadline: data.deadline,
-        status: "pending",
+        status: isAdmin && data.status ? data.status : "pending",
         tags: data.tags ?? [],
       })
       .select()

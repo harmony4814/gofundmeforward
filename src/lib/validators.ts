@@ -45,7 +45,9 @@ export const campaignFormSchema = z.object({
     .min(10, "Goal must be at least $10")
     .max(10000000, "Goal must be at most $10,000,000"),
   currency: z.string().min(3, "Please select a currency"),
-  categoryId: z.string().min(1, "Please select a category"),
+  categoryId: z.string().min(1, "Please select a category").optional(),
+  category: z.string().min(1, "Please select a category").optional(),
+  status: z.enum(["pending", "active", "rejected", "suspended", "completed"]).optional(),
   country: z.string().min(1, "Please select a country"),
   beneficiaryType: z.string().min(1, "Please select a beneficiary type"),
   beneficiaryName: z

@@ -29,7 +29,7 @@ import { Badge } from "@/components/ui/badge"
 import { BrandLogo } from "@/components/shared/BrandLogo"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { categories } from "@/lib/data"
-import { formatCurrency, slugify } from "@/lib/utils"
+import { formatCurrency } from "@/lib/utils"
 import { useCampaignStore } from "@/store/campaign-store"
 import { useAuthStore } from "@/store/auth-store"
 import type { CampaignData } from "@/lib/data"
@@ -84,8 +84,9 @@ export default function CreateCampaignPage() {
  const addUserCampaign = useCampaignStore((s) => s.addUserCampaign)
  const user = useAuthStore((s) => s.user)
  const [currentStep, setCurrentStep] = useState(1)
- const [isSubmitting, setIsSubmitting] = useState(false)
- const [createdSlug, setCreatedSlug] = useState<string | null>(null)
+const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [createdSlug, setCreatedSlug] = useState<string | null>(null)
  const [selectedCategory, setSelectedCategory] = useState("")
  const [selectedCountry, setSelectedCountry] = useState("")
  const [selectedCurrency, setSelectedCurrency] = useState("USD")
@@ -200,46 +201,84 @@ export default function CreateCampaignPage() {
  }
  }
 
- const onSubmit = async (data: FormData) => {
- setIsSubmitting(true)
- await new Promise((r) => setTimeout(r, 2000))
+const onSubmit = async (data: FormData) => {
+  setIsSubmitting(true)
+  setSubmitError(null)
 
- const slug = slugify(data.title) + "-" + Date.now().toString(36)
- const cat = categories.find((c) => c.slug === data.category)
+  const cat = categories.find((c) => c.slug === data.category)
 
- const newCampaign: CampaignData = {
- id: `user-${Date.now()}`,
- slug,
- title: data.title,
- shortDescription: data.shortDescription,
- fullStory: data.fullStory,
- goal: data.goal,
- raised: 0,
- currency: data.currency || "USD",
- category: cat?.name || data.category,
- categorySlug: data.category,
- country: data.country,
- beneficiaryName: data.beneficiaryName,
- coverImage: coverImagePreview || "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&q=80",
- galleryImages: galleryPreviews.length > 0 ? galleryPreviews : [],
- videoUrl: data.videoUrl || null,
- deadline: data.deadline || new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
- status: "pending",
- tags: data.tags ? data.tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
- donorCount: 0,
- viewCount: 0,
- shareCount: 0,
- featured: false,
- trending: false,
- creatorName: "You",
- creatorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
- createdAt: new Date().toISOString(),
- }
+  try {
+  const res = await fetch("/api/campaigns", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+  title: data.title,
+  shortDescription: data.shortDescription,
+  fullStory: data.fullStory,
+  goal: data.goal,
+  currency: data.currency || "USD",
+  category: data.category,
+  country: data.country,
+  beneficiaryType: data.beneficiaryType,
+  beneficiaryName: data.beneficiaryName,
+  coverImage: coverImagePreview || "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&q=80",
+  galleryImages: galleryPreviews,
+  videoUrl: data.videoUrl || null,
+  deadline: data.deadline || new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+  tags: data.tags ? data.tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
+  }),
+  })
 
- addUserCampaign(newCampaign)
- setIsSubmitting(false)
- setCreatedSlug(slug)
- }
+  if (res.status === 401) {
+  router.push("/login?redirect=/create-campaign")
+  return
+  }
+
+  const body = await res.json().catch(() => null)
+  if (!res.ok || !body?.data) {
+  setSubmitError(body?.error || "Failed to save campaign. Please try again.")
+  return
+  }
+
+  const saved = body.data
+  const slug = saved.slug
+  const newCampaign: CampaignData = {
+  id: saved.id,
+  slug,
+  title: saved.title,
+  shortDescription: saved.short_description,
+  fullStory: saved.full_story,
+  goal: Number(saved.goal),
+  raised: 0,
+  currency: saved.currency || "USD",
+  category: cat?.name || data.category,
+  categorySlug: data.category,
+  country: saved.country,
+  beneficiaryName: saved.beneficiary_name,
+  coverImage: saved.cover_image,
+  galleryImages: saved.gallery_images || [],
+  videoUrl: saved.video_url || null,
+  deadline: saved.deadline,
+  status: saved.status || "pending",
+  tags: saved.tags || [],
+  donorCount: 0,
+  viewCount: 0,
+  shareCount: 0,
+  featured: false,
+  trending: false,
+  creatorName: "You",
+  creatorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
+  createdAt: saved.created_at,
+  }
+
+  addUserCampaign(newCampaign)
+  setCreatedSlug(slug)
+  } catch {
+  setSubmitError("Network error. Please try again.")
+  } finally {
+  setIsSubmitting(false)
+  }
+  }
 
  const progress = (currentStep / steps.length) * 100
 
@@ -797,8 +836,11 @@ export default function CreateCampaignPage() {
  )}
  </AnimatePresence>
 
- <div className="mt-6 flex items-center justify-between">
- <Button
+<div className="mt-6 flex items-center justify-between">
+  {submitError && (
+  <p className="text-sm text-red-500">{submitError}</p>
+  )}
+  <Button
  type="button"
  variant="outline"
  onClick={handleBack}

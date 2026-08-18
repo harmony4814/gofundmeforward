@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Link from "next/link";
 import {
   Search, MoreHorizontal, Check, X, Trash2, Ban, Pencil,
   Save, Plus, Eye, Upload, Image as ImageIcon, Share2,
 } from "lucide-react";
-import { cn, slugify } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,6 +27,41 @@ import { categories, mockCampaigns } from "@/lib/data";
 import {
   Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
 } from "@/components/ui/select";
+
+interface DbCampaignRow {
+  id: string;
+  slug: string;
+  title: string;
+  short_description?: string;
+  full_story?: string;
+  goal: number;
+  raised: number;
+  currency?: string;
+  category?: { name?: string; slug?: string } | null;
+  country?: string;
+  beneficiary_name?: string;
+  cover_image?: string;
+  deadline?: string;
+  status: string;
+  tags?: string[];
+  donor_count?: number;
+  view_count?: number;
+  featured?: boolean;
+  user?: { display_name?: string } | null;
+  created_at: string;
+  isDbRow?: boolean;
+}
+
+function mapDbRow(row: any): DbCampaignRow {
+  return {
+    ...row,
+    goal: Number(row.goal || 0),
+    raised: Number(row.raised || 0),
+    category: row.category || null,
+    user: row.user || null,
+    isDbRow: true,
+  };
+}
 
 const STATUS_STYLES: Record<string, string> = {
   active: "bg-[#CDF88D] text-[#CDF88D]",
@@ -49,9 +84,33 @@ export default function AdminCampaignsPage() {
   const updateUserCampaign = useCampaignStore((s) => s.updateUserCampaign);
   const deleteUserCampaign = useCampaignStore((s) => s.deleteUserCampaign);
   const user = useAuthStore((s) => s.user);
+  const [dbCampaigns, setDbCampaigns] = useState<DbCampaignRow[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editRaised, setEditRaised] = useState("");
   const [editDonors, setEditDonors] = useState("");
+
+  const loadDbCampaigns = useCallback(async () => {
+    const [pendingRes, activeRes, rejectedRes] = await Promise.all([
+      fetch(`/api/campaigns?status=pending&limit=200`),
+      fetch(`/api/campaigns?status=active&limit=200`),
+      fetch(`/api/campaigns?status=rejected&limit=200`),
+    ]);
+    const [pendingJson, activeJson, rejectedJson] = await Promise.all([
+      pendingRes.json().catch(() => null),
+      activeRes.json().catch(() => null),
+      rejectedRes.json().catch(() => null),
+    ]);
+    const rows = [
+      ...(pendingJson?.data ?? []),
+      ...(activeJson?.data ?? []),
+      ...(rejectedJson?.data ?? []),
+    ];
+    setDbCampaigns(rows.map(mapDbRow));
+  }, []);
+
+  useEffect(() => {
+    loadDbCampaigns();
+  }, [loadDbCampaigns]);
 
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [createdSlug, setCreatedSlug] = useState<string | null>(null);
@@ -119,6 +178,31 @@ export default function AdminCampaignsPage() {
       organizer: c.creatorName,
       donorCount: c.donorCount,
     })),
+    ...dbCampaigns.map((c) => ({
+      ...c,
+      organizer: c.user?.display_name || c.beneficiary_name || "Unknown",
+      donorCount: c.donor_count || 0,
+      category: c.category?.name || "",
+      categorySlug: c.category?.slug || "",
+      coverImage: c.cover_image || "",
+      galleryImages: [],
+      videoUrl: null,
+      beneficiaryName: c.beneficiary_name || "",
+      creatorName: c.user?.display_name || "",
+      creatorAvatar: "",
+      featured: c.featured || false,
+      trending: false,
+      tags: c.tags || [],
+      viewCount: c.view_count || 0,
+      shareCount: 0,
+      fullStory: c.full_story || "",
+      shortDescription: c.short_description || "",
+      currency: c.currency || "USD",
+      goal: Number(c.goal),
+      raised: Number(c.raised),
+      createdAt: c.created_at,
+      isDbRow: true,
+    })),
   ];
 
   const filtered = allCampaigns.filter((c) => {
@@ -129,53 +213,83 @@ export default function AdminCampaignsPage() {
     return matchesSearch && c.status === activeTab;
   });
 
-  const handleCreateCampaign = () => {
+  const handleCreateCampaign = async () => {
     if (!newTitle || !newCategory || !newGoal) return;
     const goal = Math.max(100, parseInt(newGoal, 10) || 1000);
-    const slug = slugify(newTitle) + "-" + Date.now().toString(36);
-    const cat = categories.find((c) => c.slug === newCategory);
 
-    addUserCampaign({
-      id: `admin-${Date.now()}`,
-      slug,
-      title: newTitle,
-      shortDescription: newDescription || "Campaign created by admin",
-      fullStory: newFullStory || newDescription || "Campaign created by admin",
-      goal,
-      raised: 0,
-      currency: "USD",
-      category: cat?.name || newCategory,
-      categorySlug: newCategory,
-      country: newCountry,
-      beneficiaryName: user?.name || "Admin",
-      coverImage: coverImagePreview || "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&q=80",
-      galleryImages: galleryPreviews,
-      videoUrl: newVideoUrl || null,
-      deadline: newDeadline || new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-      status: "active",
-      tags: [],
-      donorCount: 0,
-      viewCount: 0,
-      shareCount: 0,
-      featured: false,
-      trending: false,
-      creatorName: user?.name || "Admin",
-      creatorAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
-      createdAt: new Date().toISOString(),
-    });
+    try {
+      const res = await fetch("/api/campaigns", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: newTitle,
+          shortDescription: newDescription || "Campaign created by admin",
+          fullStory: newFullStory || newDescription || "Campaign created by admin",
+          goal,
+          currency: "USD",
+          category: newCategory,
+          country: newCountry,
+          beneficiaryType: "charity",
+          beneficiaryName: user?.name || "Admin",
+          coverImage: coverImagePreview || "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&q=80",
+          galleryImages: galleryPreviews,
+          videoUrl: newVideoUrl || null,
+          deadline: newDeadline || new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+          status: "active",
+          tags: [],
+        }),
+      });
+      const body = await res.json().catch(() => null);
+      if (!res.ok || !body?.data) return;
 
-    setNewTitle("");
-    setNewDescription("");
-    setNewFullStory("");
-    setNewCategory("");
-    setNewCountry("United States");
-    setNewGoal("1000");
-    setNewDeadline(new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]);
-    setNewVideoUrl("");
-    setCoverImagePreview(null);
-    setGalleryPreviews([]);
-    setShowCreateForm(false);
-    setCreatedSlug(slug);
+      const saved = body.data;
+      const cat = categories.find((c) => c.slug === newCategory);
+      addUserCampaign({
+        id: saved.id,
+        slug: saved.slug,
+        title: saved.title,
+        shortDescription: saved.short_description,
+        fullStory: saved.full_story,
+        goal: Number(saved.goal),
+        raised: 0,
+        currency: "USD",
+        category: cat?.name || newCategory,
+        categorySlug: newCategory,
+        country: saved.country,
+        beneficiaryName: saved.beneficiary_name,
+        coverImage: saved.cover_image,
+        galleryImages: saved.gallery_images || [],
+        videoUrl: saved.video_url || null,
+        deadline: saved.deadline,
+        status: saved.status,
+        tags: saved.tags || [],
+        donorCount: 0,
+        viewCount: 0,
+        shareCount: 0,
+        featured: false,
+        trending: false,
+        creatorName: user?.name || "Admin",
+        creatorAvatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
+        createdAt: saved.created_at,
+      });
+
+      setDbCampaigns((prev) => [mapDbRow(saved), ...prev]);
+
+      setNewTitle("");
+      setNewDescription("");
+      setNewFullStory("");
+      setNewCategory("");
+      setNewCountry("United States");
+      setNewGoal("1000");
+      setNewDeadline(new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]);
+      setNewVideoUrl("");
+      setCoverImagePreview(null);
+      setGalleryPreviews([]);
+      setShowCreateForm(false);
+      setCreatedSlug(saved.slug);
+    } catch {
+      // ignore
+    }
   };
 
   const startEditing = (campaign: { id: string; raised: number; donorCount: number }) => {
@@ -190,17 +304,44 @@ export default function AdminCampaignsPage() {
     setEditDonors("");
   };
 
-  const saveEditing = (id: string) => {
+  const saveEditing = async (id: string) => {
     const raised = Math.max(0, parseInt(editRaised, 10) || 0);
     const donors = Math.max(0, parseInt(editDonors, 10) || 0);
-    const userCampaign = userCampaigns.find((c) => c.id === id);
-    if (userCampaign) {
-      updateUserCampaign(id, { raised, donorCount: donors });
+    if (dbCampaigns.some((c) => c.id === id)) {
+      await fetch(`/api/campaigns/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ raised, donorCount: donors }),
+      });
+      setDbCampaigns((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, raised, donor_count: donors } : c))
+      );
+    } else {
+      const userCampaign = userCampaigns.find((c) => c.id === id);
+      if (userCampaign) {
+        updateUserCampaign(id, { raised, donorCount: donors });
+      }
     }
     setEditingId(null);
   };
 
+  const updateDbStatus = async (id: string, status: string) => {
+    const res = await fetch(`/api/campaigns/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
+    if (res.ok) {
+      setDbCampaigns((prev) => prev.map((c) => (c.id === id ? { ...c, status } : c)));
+    }
+  };
+
   const handleApprove = (id: string) => {
+    const dbCampaign = dbCampaigns.find((c) => c.id === id);
+    if (dbCampaign) {
+      updateDbStatus(id, "active");
+      return;
+    }
     const userCampaign = userCampaigns.find((c) => c.id === id);
     if (userCampaign) {
       updateUserCampaign(id, { status: "active" });
@@ -208,6 +349,10 @@ export default function AdminCampaignsPage() {
   };
 
   const handleReject = (id: string) => {
+    if (dbCampaigns.some((c) => c.id === id)) {
+      updateDbStatus(id, "rejected");
+      return;
+    }
     const userCampaign = userCampaigns.find((c) => c.id === id);
     if (userCampaign) {
       updateUserCampaign(id, { status: "rejected" });
@@ -215,13 +360,24 @@ export default function AdminCampaignsPage() {
   };
 
   const handleSuspend = (id: string) => {
+    if (dbCampaigns.some((c) => c.id === id)) {
+      updateDbStatus(id, "suspended");
+      return;
+    }
     const userCampaign = userCampaigns.find((c) => c.id === id);
     if (userCampaign) {
       updateUserCampaign(id, { status: "suspended" });
     }
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    if (dbCampaigns.some((c) => c.id === id)) {
+      const res = await fetch(`/api/campaigns/${id}`, { method: "DELETE" });
+      if (res.ok) {
+        setDbCampaigns((prev) => prev.filter((c) => c.id !== id));
+      }
+      return;
+    }
     deleteUserCampaign(id);
   };
 
@@ -599,6 +755,10 @@ export default function AdminCampaignsPage() {
                   const isUserCampaign = userCampaigns.some(
                     (c) => c.id === campaign.id
                   );
+                  const isDbCampaign = dbCampaigns.some(
+                    (c) => c.id === campaign.id
+                  );
+                  const canManage = isUserCampaign || isDbCampaign;
                   return (
                     <TableRow key={campaign.id}>
                       <TableCell className="font-medium max-w-[250px] truncate">
@@ -678,7 +838,7 @@ export default function AdminCampaignsPage() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                               {campaign.status === "pending" &&
-                                isUserCampaign && (
+                                canManage && (
                                   <>
                                     <DropdownMenuItem
                                       onClick={() =>
@@ -699,7 +859,7 @@ export default function AdminCampaignsPage() {
                                     <DropdownMenuSeparator />
                                   </>
                                 )}
-                              {isUserCampaign && (
+                              {canManage && (
                                 <>
                                   <DropdownMenuItem
                                     onClick={() => startEditing(campaign)}
@@ -726,7 +886,7 @@ export default function AdminCampaignsPage() {
                                   </DropdownMenuItem>
                                 </>
                               )}
-                              {!isUserCampaign && (
+                              {!canManage && (
                                 <DropdownMenuItem disabled>
                                   <Eye className="h-4 w-4" />
                                   Demo Campaign

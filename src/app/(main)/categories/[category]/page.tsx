@@ -1,37 +1,48 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { Badge as BadgeComponent } from "@/components/ui/badge"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { categories, mockCampaigns } from "@/lib/data"
 import { CampaignCard } from "@/components/shared/CampaignCard"
+import { useCampaignStore } from "@/store/campaign-store"
 
 export default function CategoryDetailPage() {
   const params = useParams()
   const categorySlug = params.category as string
   const [sortBy, setSortBy] = useState("newest")
+  const userCampaigns = useCampaignStore((s) => s.userCampaigns)
+  const allCampaigns = useCampaignStore((s) => s.allCampaigns)
+  const fetchCampaigns = useCampaignStore((s) => s.fetchCampaigns)
+
+  useEffect(() => {
+    fetchCampaigns()
+  }, [fetchCampaigns])
 
   const category = categories.find((c) => c.slug === categorySlug)
 
   const filteredCampaigns = useMemo(() => {
-    const campaigns = mockCampaigns.filter((c) => c.categorySlug === categorySlug)
+    const campaigns = [...mockCampaigns, ...userCampaigns, ...allCampaigns].filter(
+      (c) => c.categorySlug === categorySlug && c.status !== "rejected"
+    )
+    const unique = Array.from(new Map(campaigns.map((c) => [c.id, c])).values())
     switch (sortBy) {
       case "most_funded":
-        return [...campaigns].sort((a, b) => b.raised - a.raised)
+        return [...unique].sort((a, b) => b.raised - a.raised)
       case "ending_soon":
-        return [...campaigns].sort(
+        return [...unique].sort(
           (a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime()
         )
       case "most_popular":
-        return [...campaigns].sort((a, b) => b.donorCount - a.donorCount)
+        return [...unique].sort((a, b) => b.donorCount - a.donorCount)
       default:
-        return [...campaigns].sort(
+        return [...unique].sort(
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         )
     }
-  }, [categorySlug, sortBy])
+  }, [categorySlug, sortBy, userCampaigns, allCampaigns])
 
   if (!category) {
     return (

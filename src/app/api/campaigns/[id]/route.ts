@@ -72,21 +72,30 @@ export async function PUT(
       }
     }
 
+    const { data: requesterData } = await admin.auth.admin.getUserById(user.id);
+    const isAdmin = requesterData.user?.app_metadata?.role === "admin";
+
     const allowedFields: Record<string, string> = {};
     const fieldMap: Record<string, string> = {
       title: "title",
       shortDescription: "short_description",
       fullStory: "full_story",
       goal: "goal",
+      raised: "raised",
+      donorCount: "donor_count",
       coverImage: "cover_image",
       galleryImages: "gallery_images",
       videoUrl: "video_url",
       deadline: "deadline",
       tags: "tags",
+      status: "status",
     };
 
     for (const [key, dbCol] of Object.entries(fieldMap)) {
       if (key in body) {
+        if (key === "status" && !isAdmin) {
+          continue;
+        }
         allowedFields[dbCol] = body[key];
       }
     }

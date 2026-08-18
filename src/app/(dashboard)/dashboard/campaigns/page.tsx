@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Plus, Search, Filter, MoreHorizontal, Eye, Pencil, Trash2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useCampaignStore } from "@/store/campaign-store";
+import { useAuthStore } from "@/store/auth-store";
 import { mockCampaigns } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -35,13 +36,25 @@ const STATUS_STYLES: Record<string, string> = {
   suspended: "bg-red-100 text-red-700",
 };
 
-const CAMPAIGNS = mockCampaigns.slice(0, 8);
-
 export default function CampaignsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const userCampaigns = useCampaignStore((s) => s.userCampaigns);
+  const fetchUserCampaigns = useCampaignStore((s) => s.fetchUserCampaigns);
+  const user = useAuthStore((s) => s.user);
 
-  const filteredCampaigns = CAMPAIGNS.filter((c) => {
+  useEffect(() => {
+    if (user?.id) {
+      fetchUserCampaigns(user.id);
+    }
+  }, [user?.id, fetchUserCampaigns]);
+
+  const campaigns = useMemo(() => {
+    const merged = userCampaigns.length > 0 ? userCampaigns : mockCampaigns.slice(0, 8);
+    return Array.from(new Map(merged.map((c) => [c.id, c])).values());
+  }, [userCampaigns]);
+
+  const filteredCampaigns = campaigns.filter((c) => {
     const matchesSearch = c.title.toLowerCase().includes(search.toLowerCase());
     const matchesStatus = statusFilter === "all" || c.status === statusFilter;
     return matchesSearch && matchesStatus;
@@ -66,14 +79,14 @@ export default function CampaignsPage() {
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Total Campaigns</p>
-            <p className="text-2xl font-bold text-foreground">{CAMPAIGNS.length}</p>
+            <p className="text-2xl font-bold text-foreground">{campaigns.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Active</p>
             <p className="text-2xl font-bold text-foreground">
-              {CAMPAIGNS.filter((c) => c.status === "active").length}
+              {campaigns.filter((c) => c.status === "active").length}
             </p>
           </CardContent>
         </Card>
@@ -81,7 +94,7 @@ export default function CampaignsPage() {
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Total Raised</p>
             <p className="text-2xl font-bold text-foreground">
-              ${CAMPAIGNS.reduce((sum, c) => sum + c.raised, 0).toLocaleString()}
+              ${campaigns.reduce((sum, c) => sum + c.raised, 0).toLocaleString()}
             </p>
           </CardContent>
         </Card>

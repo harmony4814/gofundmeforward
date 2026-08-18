@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useMemo, useState } from "react"
+import { Suspense, useMemo, useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { Search as SearchIcon, SlidersHorizontal, X, ChevronLeft, ChevronRight } from "lucide-react"
@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { CampaignCard } from "@/components/shared/CampaignCard"
 import { categories, mockCampaigns } from "@/lib/data"
+import { useCampaignStore } from "@/store/campaign-store"
 
 const ITEMS_PER_PAGE = 6
 
@@ -32,11 +33,21 @@ function SearchPageContent() {
  const [sortBy, setSortBy] = useState("newest")
  const [goalMin, setGoalMin] = useState("")
  const [goalMax, setGoalMax] = useState("")
- const [page, setPage] = useState(1)
- const [mobileFilters, setMobileFilters] = useState(false)
+const [page, setPage] = useState(1)
+  const [mobileFilters, setMobileFilters] = useState(false)
+  const userCampaigns = useCampaignStore((s) => s.userCampaigns)
+  const allCampaigns = useCampaignStore((s) => s.allCampaigns)
+  const fetchCampaigns = useCampaignStore((s) => s.fetchCampaigns)
 
- const results = useMemo(() => {
- let filtered = [...mockCampaigns]
+  useEffect(() => {
+    fetchCampaigns()
+  }, [fetchCampaigns])
+
+  const results = useMemo(() => {
+  let filtered = [...mockCampaigns, ...userCampaigns, ...allCampaigns].filter(
+  (c) => c.status !== "rejected"
+  )
+  filtered = Array.from(new Map(filtered.map((c) => [c.id, c])).values())
 
  if (query) {
  const q = query.toLowerCase()
@@ -75,7 +86,7 @@ function SearchPageContent() {
  }
 
  return filtered
- }, [query, category, sortBy, goalMin, goalMax])
+ }, [query, category, sortBy, goalMin, goalMax, userCampaigns, allCampaigns])
 
  const totalPages = Math.ceil(results.length / ITEMS_PER_PAGE)
  const paginatedResults = results.slice(

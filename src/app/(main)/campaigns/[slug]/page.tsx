@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useMemo, useState, useCallback } from "react"
+import { use, useMemo, useState, useCallback, useEffect } from "react"
 import { motion } from "framer-motion"
 import { notFound } from "next/navigation"
 import {
@@ -26,13 +26,25 @@ export default function CampaignDetailPage({
 }) {
   const { slug } = use(params)
   const userCampaigns = useCampaignStore((s) => s.userCampaigns)
+  const fetchCampaignBySlug = useCampaignStore((s) => s.fetchCampaignBySlug)
+  const fetchCampaigns = useCampaignStore((s) => s.fetchCampaigns)
+  const [dbCampaign, setDbCampaign] = useState<typeof mockCampaigns[number] | null>(null)
+
+  useEffect(() => {
+    fetchCampaigns()
+    if (mockCampaigns.some((c) => c.slug === slug)) return
+    fetchCampaignBySlug(slug).then((c) => {
+      if (c) setDbCampaign(c)
+    })
+  }, [slug, fetchCampaignBySlug, fetchCampaigns])
 
   const campaign = useMemo(() => {
     return (
       mockCampaigns.find((c) => c.slug === slug) ??
-      userCampaigns.find((c) => c.slug === slug)
+      userCampaigns.find((c) => c.slug === slug) ??
+      dbCampaign
     )
-  }, [slug, userCampaigns])
+  }, [slug, userCampaigns, dbCampaign])
 
   if (!campaign) {
     notFound()
@@ -98,17 +110,18 @@ export default function CampaignDetailPage({
     []
   )
 
-  const allCampaigns = useMemo(
-    () => [...mockCampaigns, ...userCampaigns],
-    [userCampaigns]
+  const allCampaigns = useCampaignStore((s) => s.allCampaigns)
+  const allStoreCampaigns = useMemo(
+    () => [...mockCampaigns, ...userCampaigns, ...allCampaigns],
+    [userCampaigns, allCampaigns]
   )
 
   const relatedCampaigns = useMemo(
     () =>
-      allCampaigns
+      allStoreCampaigns
         .filter((c) => c.categorySlug === campaign.categorySlug && c.id !== campaign.id)
         .slice(0, 3),
-    [allCampaigns, campaign]
+    [allStoreCampaigns, campaign]
   )
 
   return (
