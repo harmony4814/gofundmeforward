@@ -39,7 +39,7 @@ const DONATIONS = [
 ];
 
 const STATUS_STYLES: Record<string, string> = {
- completed: "bg-green-100 text-green-700",
+ completed: "bg-[#CDF88D] text-[#CDF88D]",
  pending: "bg-amber-100 text-amber-700",
  failed: "bg-red-100 text-red-700",
 };
@@ -48,7 +48,7 @@ const METHOD_STYLES: Record<string, string> = {
  card: "bg-blue-100 text-blue-700",
  paypal: "bg-indigo-100 text-indigo-700",
  flutterwave: "bg-orange-100 text-orange-700",
- paystack: "bg-green-100 text-green-700",
+ paystack: "bg-[#CDF88D] text-[#CDF88D]",
  bank_transfer: "bg-purple-100 text-purple-700",
  crypto: "bg-amber-100 text-amber-700",
 };
@@ -112,7 +112,7 @@ export default function AdminDonationsPage() {
  <Card>
  <CardContent className="p-4">
  <div className="flex items-center gap-3">
- <div className="flex h-10 w-10 items-center justify-center rounded-lg text-green-600 bg-green-100">
+ <div className="flex h-10 w-10 items-center justify-center rounded-lg text-[#CDF88D] bg-[#CDF88D]">
  <TrendingUp className="h-5 w-5" />
  </div>
  <div>

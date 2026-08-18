@@ -109,7 +109,7 @@ export function CampaignStory({
  {organizer.avatar && (
  <AvatarImage src={organizer.avatar} alt={organizer.name} />
  )}
- <AvatarFallback className="bg-green-100 text-green-700 font-medium">
+ <AvatarFallback className="bg-[#CDF88D] text-[#CDF88D] font-medium">
  {getInitials(organizer.name)}
  </AvatarFallback>
  </Avatar>
@@ -181,7 +181,7 @@ export function CampaignStory({
  <CardContent className="space-y-4">
  <div className="space-y-2">
  <div className="flex items-baseline justify-between">
- <span className="text-2xl font-bold text-green-600">
+ <span className="text-2xl font-bold text-[#CDF88D]">
  {formatCurrency(details.raised, currency)}
  </span>
  <span className="text-sm text-muted-foreground">
@@ -193,8 +193,8 @@ export function CampaignStory({
 
  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
  <div className="flex items-center gap-2.5 rounded-lg bg-muted/50 p-3">
- <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100">
- <Target className="h-4 w-4 text-green-600" />
+ <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#CDF88D]">
+ <Target className="h-4 w-4 text-[#CDF88D]" />
  </div>
  <div>
  <p className="text-xs text-muted-foreground">Goal</p>

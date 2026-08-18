@@ -42,21 +42,21 @@ export function ThemeProviderToggle() {
  <div className="absolute right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded-lg border bg-white shadow-lg">
  <button
  onClick={() => { setTheme("light"); setOpen(false) }}
- className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-gray-100 ${theme === "light" ? "text-[#22c55e]" : "text-gray-600"}`}
+ className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-gray-100 ${theme === "light" ? "text-[#CDF88D]" : "text-gray-600"}`}
  >
  <Sun className="h-4 w-4" />
  Light
  </button>
  <button
  onClick={() => { setTheme("dark"); setOpen(false) }}
- className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-gray-100 ${theme === "dark" ? "text-[#22c55e]" : "text-gray-600"}`}
+ className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-gray-100 ${theme === "dark" ? "text-[#CDF88D]" : "text-gray-600"}`}
  >
  <Moon className="h-4 w-4" />
  Dark
  </button>
  <button
  onClick={() => { setTheme("system"); setOpen(false) }}
- className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-gray-100 ${theme === "system" ? "text-[#22c55e]" : "text-gray-600"}`}
+ className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-gray-100 ${theme === "system" ? "text-[#CDF88D]" : "text-gray-600"}`}
  >
  <Monitor className="h-4 w-4" />
  System

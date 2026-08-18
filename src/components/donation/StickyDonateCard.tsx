@@ -16,7 +16,6 @@ import {
 import {
   Users,
   Clock,
-  Heart,
   Share2,
   ChevronUp,
 } from "lucide-react"
@@ -80,7 +79,7 @@ export function StickyDonateCard({ campaign, onDonate }: StickyDonateCardProps) 
               <div className="p-5 space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-baseline justify-between">
-                    <span className="text-2xl font-bold text-green-600">
+                    <span className="text-2xl font-bold text-[#CDF88D]">
                       {formatCurrency(campaign.raised, currency)}
                     </span>
                     <span className="text-sm text-muted-foreground">
@@ -115,16 +114,15 @@ export function StickyDonateCard({ campaign, onDonate }: StickyDonateCardProps) 
                 <Button
                   onClick={onDonate}
                   size="lg"
-                  className="w-full h-12 bg-green-600 hover:bg-green-700 text-white text-base font-semibold gap-2"
+                  className="w-full h-12 bg-[#CDF88D] hover:bg-[#CDF88D] text-[#14532d] text-base font-semibold hover:brightness-95"
                 >
-                  <Heart className="h-5 w-5" />
                   Donate Now
                 </Button>
 
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full gap-2"
+                  className="w-full gap-2 border-[#14532d] bg-[#14532d] text-[#CDF88D] hover:bg-[#174a2e] hover:text-[#CDF88D]"
                   onClick={() => setShowShare(!showShare)}
                 >
                   <Share2 className="h-4 w-4" />
@@ -161,7 +159,7 @@ export function StickyDonateCard({ campaign, onDonate }: StickyDonateCardProps) 
       <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="mx-auto flex items-center gap-3 px-4 py-3 max-w-lg">
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold text-green-600 truncate">
+            <p className="text-sm font-bold text-[#CDF88D] truncate">
               {formatCurrency(campaign.raised, currency)}
             </p>
             <p className="text-xs text-muted-foreground truncate">
@@ -169,16 +167,15 @@ export function StickyDonateCard({ campaign, onDonate }: StickyDonateCardProps) 
             </p>
             <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-muted">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-green-400 transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-[#CDF88D] to-[#CDF88D] transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
           <Button
             onClick={onDonate}
-            className="shrink-0 bg-green-600 hover:bg-green-700 text-white h-11 px-6 gap-2"
+            className="shrink-0 bg-[#CDF88D] hover:bg-[#CDF88D] text-[#14532d] h-11 px-6 hover:brightness-95"
           >
-            <Heart className="h-4 w-4" />
             Donate
           </Button>
         </div>

@@ -81,8 +81,8 @@ export function CampaignHero({
  />
  </AnimatePresence>
  ) : (
- <div className="flex h-full items-center justify-center bg-gradient-to-br from-green-100 to-emerald-50">
- <Heart className="h-16 w-16 text-green-300" />
+ <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#CDF88D] to-[#CDF88D]">
+ <Heart className="h-16 w-16 text-[#CDF88D]" />
  </div>
  )}
 

@@ -43,14 +43,14 @@ export default function EmptyState({
  <div className="mt-6">
  {action.href ? (
  <a href={action.href}>
- <Button className="rounded-full bg-green-500 px-6 text-white hover:bg-green-600">
+ <Button className="rounded-full bg-[#CDF88D] px-6 text-[#14532d] hover:bg-[#CDF88D]">
  {action.label}
  </Button>
  </a>
  ) : (
  <Button
  onClick={action.onClick}
- className="rounded-full bg-green-500 px-6 text-white hover:bg-green-600"
+ className="rounded-full bg-[#CDF88D] px-6 text-[#14532d] hover:bg-[#CDF88D]"
  >
  {action.label}
  </Button>

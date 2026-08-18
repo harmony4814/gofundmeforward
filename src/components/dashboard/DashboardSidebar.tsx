@@ -15,6 +15,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
@@ -70,13 +71,8 @@ export default function DashboardSidebar() {
     >
       <div className="flex items-center justify-between p-4">
         {!collapsed && (
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-              <Heart className="h-4 w-4 text-primary-foreground" fill="currentColor" />
-            </div>
-            <span className="text-lg font-bold text-foreground">
-              Fund<span className="text-primary">Rise</span>
-            </span>
+          <Link href="/" className="flex items-center">
+            <BrandLogo className="h-6 w-auto" />
           </Link>
         )}
         <Button

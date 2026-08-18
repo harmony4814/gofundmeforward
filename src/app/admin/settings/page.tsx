@@ -12,7 +12,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import { createClient } from "@/lib/supabase/client";
 import toast from "react-hot-toast";
 
 const EMAIL_TEMPLATES = [
@@ -31,7 +30,7 @@ const EMAIL_TEMPLATES = [
 export default function AdminSettingsPage() {
   const [activeTab, setActiveTab] = useState("general");
 
-  const [siteName, setSiteName] = useState("FundForward");
+  const [siteName, setSiteName] = useState("gofundme");
   const [siteDescription, setSiteDescription] = useState(
     "A crowdfunding platform connecting donors with causes that matter."
   );
@@ -51,15 +50,16 @@ export default function AdminSettingsPage() {
   const [csrfProtection, setCsrfProtection] = useState(true);
   const [emailVerification, setEmailVerification] = useState(true);
 
-  // Payment settings from Supabase
+  // Payment settings (localStorage)
   const [bitcoinWallet, setBitcoinWallet] = useState("");
   const [cashappCashtag, setCashappCashtag] = useState("");
-  const [qrCodeUrl, setQrCodeUrl] = useState("");
-  const [qrCodePreview, setQrCodePreview] = useState("");
+  const [bitcoinQr, setBitcoinQr] = useState("");
+  const [cashappQr, setCashappQr] = useState("");
   const [paymentsLoading, setPaymentsLoading] = useState(true);
   const [paymentsSaving, setPaymentsSaving] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
-  const qrInputRef = useRef<HTMLInputElement>(null);
+  const btcQrInputRef = useRef<HTMLInputElement>(null);
+  const casQrInputRef = useRef<HTMLInputElement>(null);
 
   const toggleTemplate = (id: string) => {
     setTemplates((prev) =>
@@ -67,47 +67,47 @@ export default function AdminSettingsPage() {
     );
   };
 
-  // Load payment settings from Supabase
+  // Load payment settings from localStorage
   useEffect(() => {
-    async function loadPaymentSettings() {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("payment_settings")
-        .select("key, value");
-
-      if (data) {
-        for (const row of data) {
-          if (row.key === "bitcoin_wallet") setBitcoinWallet(row.value || "");
-          if (row.key === "cashapp_cashtag") setCashappCashtag(row.value || "");
-          if (row.key === "payment_qr_code") {
-            setQrCodeUrl(row.value || "");
-            setQrCodePreview(row.value || "");
-          }
-        }
+    try {
+      const raw = localStorage.getItem("ff_payment_settings");
+      if (raw) {
+        const data = JSON.parse(raw);
+        setBitcoinWallet(data.bitcoin_wallet || "");
+        setCashappCashtag(data.cashapp_cashtag || "");
+        setBitcoinQr(data.bitcoin_qr || "");
+        setCashappQr(data.cashapp_qr || "");
       }
-      setPaymentsLoading(false);
-    }
-    loadPaymentSettings();
+    } catch {}
+    setPaymentsLoading(false);
   }, []);
 
   const handleSavePayments = async () => {
     setPaymentsSaving(true);
-    const supabase = createClient();
-
-    const updates = [
-      { key: "bitcoin_wallet", value: bitcoinWallet },
-      { key: "cashapp_cashtag", value: cashappCashtag },
-      { key: "payment_qr_code", value: qrCodeUrl },
-    ];
-
-    for (const update of updates) {
-      await supabase
-        .from("payment_settings")
-        .upsert(update, { onConflict: "key" });
-    }
-
+    localStorage.setItem("ff_payment_settings", JSON.stringify({
+      bitcoin_wallet: bitcoinWallet,
+      cashapp_cashtag: cashappCashtag,
+      bitcoin_qr: bitcoinQr,
+      cashapp_qr: cashappQr,
+    }));
+    await new Promise((r) => setTimeout(r, 500));
     setPaymentsSaving(false);
     toast.success("Payment settings saved!");
+  };
+
+  const handleQrUpload = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setQr: (val: string) => void
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Image must be under 2MB");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => setQr(reader.result as string);
+    reader.readAsDataURL(file);
   };
 
   const handleCopy = (text: string, field: string) => {
@@ -215,8 +215,54 @@ export default function AdminSettingsPage() {
                             size="icon"
                             onClick={() => handleCopy(bitcoinWallet, "btc")}
                           >
-                            {copiedField === "btc" ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                            {copiedField === "btc" ? <Check className="h-4 w-4 text-[#CDF88D]" /> : <Copy className="h-4 w-4" />}
                           </Button>
+                        )}
+                      </div>
+                    </div>
+                    <Separator />
+                    <div className="space-y-2">
+                      <Label>Bitcoin QR Code</Label>
+                      <p className="text-xs text-muted-foreground">Upload a QR code for your Bitcoin wallet address.</p>
+                      <div className="flex items-start gap-4">
+                        <div className="space-y-2">
+                          <input
+                            ref={btcQrInputRef}
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => handleQrUpload(e, setBitcoinQr)}
+                          />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => btcQrInputRef.current?.click()}
+                          >
+                            <Upload className="mr-2 h-4 w-4" />
+                            Upload QR
+                          </Button>
+                          {bitcoinQr && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-destructive"
+                              onClick={() => { setBitcoinQr(""); if (btcQrInputRef.current) btcQrInputRef.current.value = ""; }}
+                            >
+                              Remove
+                            </Button>
+                          )}
+                        </div>
+                        {bitcoinQr ? (
+                          <div className="relative h-32 w-32 overflow-hidden rounded-lg border bg-white p-2">
+                            <img src={bitcoinQr} alt="Bitcoin QR Preview" className="h-full w-full object-contain" />
+                          </div>
+                        ) : (
+                          <div className="flex h-32 w-32 items-center justify-center rounded-lg border border-dashed bg-muted/50">
+                            <div className="text-center">
+                              <QrCode className="mx-auto h-8 w-8 text-muted-foreground/40" />
+                              <p className="mt-1 text-xs text-muted-foreground">No QR</p>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -230,7 +276,7 @@ export default function AdminSettingsPage() {
                       Cash App Payment
                     </CardTitle>
                     <CardDescription>
-                      Donors will see your Cash App cashtag when they select Cash App.
+                      Donors will see your Cash App cashtag and QR code when they select Cash App.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -253,51 +299,46 @@ export default function AdminSettingsPage() {
                             size="icon"
                             onClick={() => handleCopy(`$${cashappCashtag}`, "cashtag")}
                           >
-                            {copiedField === "cashtag" ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                            {copiedField === "cashtag" ? <Check className="h-4 w-4 text-[#CDF88D]" /> : <Copy className="h-4 w-4" />}
                           </Button>
                         )}
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <QrCode className="h-5 w-5 text-purple-500" />
-                      Payment QR Code
-                    </CardTitle>
-                    <CardDescription>
-                      Upload a QR code image (Bitcoin or Cash App). This will be shown to donors above the wallet/cashtag details.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start gap-6">
-                      <div className="space-y-3">
-                        <Input
-                          ref={qrInputRef}
-                          type="url"
-                          placeholder="Paste image URL (e.g. https://...)"
-                          value={qrCodeUrl}
-                          onChange={(e) => {
-                            setQrCodeUrl(e.target.value);
-                            setQrCodePreview(e.target.value);
-                          }}
-                          className="max-w-md"
-                        />
-                        <p className="text-xs text-muted-foreground">
-                          Paste a URL to your QR code image (from any image hosting service).
-                        </p>
-                      </div>
-                      <div className="shrink-0">
-                        {qrCodePreview ? (
+                    <Separator />
+                    <div className="space-y-2">
+                      <Label>Cash App QR Code</Label>
+                      <p className="text-xs text-muted-foreground">Upload a QR code for your Cash App payment.</p>
+                      <div className="flex items-start gap-4">
+                        <div className="space-y-2">
+                          <input
+                            ref={casQrInputRef}
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => handleQrUpload(e, setCashappQr)}
+                          />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => casQrInputRef.current?.click()}
+                          >
+                            <Upload className="mr-2 h-4 w-4" />
+                            Upload QR
+                          </Button>
+                          {cashappQr && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-destructive"
+                              onClick={() => { setCashappQr(""); if (casQrInputRef.current) casQrInputRef.current.value = ""; }}
+                            >
+                              Remove
+                            </Button>
+                          )}
+                        </div>
+                        {cashappQr ? (
                           <div className="relative h-32 w-32 overflow-hidden rounded-lg border bg-white p-2">
-                            <img
-                              src={qrCodePreview}
-                              alt="QR Code Preview"
-                              className="h-full w-full object-contain"
-                              onError={() => setQrCodePreview("")}
-                            />
+                            <img src={cashappQr} alt="Cash App QR Preview" className="h-full w-full object-contain" />
                           </div>
                         ) : (
                           <div className="flex h-32 w-32 items-center justify-center rounded-lg border border-dashed bg-muted/50">
@@ -414,7 +455,7 @@ export default function AdminSettingsPage() {
                         <CheckCircle
                           className={cn(
                             "h-4 w-4",
-                            template.enabled ? "text-green-500" : "text-muted-foreground"
+                            template.enabled ? "text-[#CDF88D]" : "text-muted-foreground"
                           )}
                         />
                         <span className="text-sm font-medium">{template.name}</span>

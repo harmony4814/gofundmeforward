@@ -13,7 +13,7 @@ interface ProgressBarProps {
 }
 
 const colorClasses = {
-  green: "bg-gradient-to-r from-emerald-500 to-green-400",
+  green: "bg-gradient-to-r from-[#CDF88D] to-[#CDF88D]",
   blue: "bg-gradient-to-r from-blue-600 to-blue-400",
   orange: "bg-gradient-to-r from-orange-500 to-amber-400",
   purple: "bg-gradient-to-r from-purple-600 to-purple-400",

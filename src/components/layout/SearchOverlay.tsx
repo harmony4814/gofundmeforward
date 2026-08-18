@@ -100,7 +100,7 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
  value={query}
  onChange={(e) => setQuery(e.target.value)}
  placeholder="Search for campaigns, people, or causes..."
- className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 pl-12 pr-12 text-lg text-gray-900 placeholder:text-gray-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/20"
+ className="h-14 w-full rounded-2xl border border-gray-200 bg-gray-50 pl-12 pr-12 text-lg text-gray-900 placeholder:text-gray-400 focus:border-[#CDF88D] focus:outline-none focus:ring-2 focus:ring-[#CDF88D]/20"
  />
  {query && (
  <button
@@ -132,7 +132,7 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
  }
  className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
  selectedCategory === cat
- ? "bg-green-500 text-white shadow-sm"
+ ? "bg-[#CDF88D] text-[#14532d] shadow-sm"
  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
  }`}
  >

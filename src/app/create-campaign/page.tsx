@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { motion, AnimatePresence } from "framer-motion"
 import {
- Heart,
  ArrowLeft,
  ArrowRight,
  Upload,
@@ -27,6 +26,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
+import { BrandLogo } from "@/components/shared/BrandLogo"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { categories } from "@/lib/data"
 import { formatCurrency, slugify } from "@/lib/utils"
@@ -251,8 +251,8 @@ export default function CreateCampaignPage() {
  animate={{ opacity: 1, scale: 1 }}
  className="text-center"
  >
- <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#22c55e]/10">
- <Check className="h-10 w-10 text-[#22c55e]" />
+ <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#CDF88D]/10">
+ <Check className="h-10 w-10 text-[#CDF88D]" />
  </div>
  <h1 className="mt-6 text-3xl font-bold">Campaign Created!</h1>
  <p className="mt-3 text-gray-500">
@@ -263,7 +263,7 @@ export default function CreateCampaignPage() {
  <Button variant="outline">My Dashboard</Button>
  </Link>
  <Link href={`/campaigns/${createdSlug}`}>
- <Button className="bg-[#22c55e] text-white hover:bg-[#16a34a]">
+ <Button className="bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]">
  View Campaign
  </Button>
  </Link>
@@ -278,18 +278,15 @@ export default function CreateCampaignPage() {
  <div className="border-b bg-white">
  <div className="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
  <div className="flex items-center justify-between">
- <Link href="/" className="flex items-center gap-2">
- <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#22c55e]">
- <Heart className="h-5 w-5 text-white" fill="white" />
- </div>
- <span className="text-lg font-bold">FundForward</span>
- </Link>
+  <Link href="/" className="flex items-center">
+  <BrandLogo />
+  </Link>
  <Badge variant="outline">Step {currentStep} of {steps.length}</Badge>
  </div>
  <div className="mt-4">
  <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
  <motion.div
- className="h-full rounded-full bg-[#22c55e]"
+ className="h-full rounded-full bg-[#CDF88D]"
  initial={{ width: 0 }}
  animate={{ width: `${progress}%` }}
  transition={{ duration: 0.3 }}
@@ -301,16 +298,16 @@ export default function CreateCampaignPage() {
  key={step.id}
  className={`flex items-center gap-1.5 text-xs ${
  currentStep >= step.id
- ? "font-medium text-[#22c55e]"
+ ? "font-medium text-[#CDF88D]"
  : "text-gray-400"
  }`}
  >
  <div
  className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${
  currentStep > step.id
- ? "bg-[#22c55e] text-white"
+ ? "bg-[#CDF88D] text-[#14532d]"
  : currentStep === step.id
- ? "border-2 border-[#22c55e] text-[#22c55e]"
+ ? "border-2 border-[#CDF88D] text-[#CDF88D]"
  : "border border-gray-300 text-gray-400"
  }`}
  >
@@ -519,7 +516,7 @@ export default function CreateCampaignPage() {
  <button
  type="button"
  onClick={() => coverInputRef.current?.click()}
- className="flex h-48 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#22c55e] hover:bg-[#22c55e]/5"
+ className="flex h-48 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#CDF88D] hover:bg-[#CDF88D]/5"
  >
  <Upload className="h-10 w-10 text-gray-400" />
  <p className="mt-2 text-sm font-medium">
@@ -568,7 +565,7 @@ export default function CreateCampaignPage() {
  <button
  type="button"
  onClick={() => galleryInputRef.current?.click()}
- className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors hover:border-[#22c55e] hover:bg-[#22c55e]/5"
+ className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors hover:border-[#CDF88D] hover:bg-[#CDF88D]/5"
  >
  <ImageIcon className="h-6 w-6 text-gray-400" />
  <span className="mt-1 text-[10px] text-gray-500">Add more</span>
@@ -580,7 +577,7 @@ export default function CreateCampaignPage() {
  <button
  type="button"
  onClick={() => galleryInputRef.current?.click()}
- className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#22c55e] hover:bg-[#22c55e]/5"
+ className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#CDF88D] hover:bg-[#CDF88D]/5"
  >
  <ImageIcon className="h-8 w-8 text-gray-400" />
  <p className="mt-2 text-sm font-medium">Add additional images</p>
@@ -767,7 +764,7 @@ export default function CreateCampaignPage() {
  </div>
  <div>
  <p className="text-xs font-medium text-gray-500">Fundraising Goal</p>
- <p className="text-sm font-semibold text-[#22c55e]">
+ <p className="text-sm font-semibold text-[#CDF88D]">
  {formatCurrency(formValues.goal || 0, selectedCurrency)}
  </p>
  </div>
@@ -815,7 +812,7 @@ export default function CreateCampaignPage() {
  <Button
  type="button"
  onClick={handleNext}
- className="bg-[#22c55e] text-white hover:bg-[#16a34a]"
+ className="bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]"
  >
  Next
  <ArrowRight className="ml-1 h-4 w-4" />
@@ -823,7 +820,7 @@ export default function CreateCampaignPage() {
  ) : (
  <Button
  type="submit"
- className="bg-[#22c55e] text-white hover:bg-[#16a34a]"
+ className="bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]"
  disabled={isSubmitting}
  >
  {isSubmitting ? (

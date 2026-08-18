@@ -28,7 +28,7 @@ const NOTIFICATIONS = [
  read: false,
  createdAt: "2025-07-18T10:30:00Z",
  icon: Heart,
- color: "text-green-600 bg-green-100",
+ color: "text-[#CDF88D] bg-[#CDF88D]",
  },
  {
  id: "2",
@@ -61,7 +61,7 @@ const NOTIFICATIONS = [
  read: true,
  createdAt: "2025-07-17T12:00:00Z",
  icon: Heart,
- color: "text-green-600 bg-green-100",
+ color: "text-[#CDF88D] bg-[#CDF88D]",
  },
  {
  id: "5",
@@ -83,7 +83,7 @@ const NOTIFICATIONS = [
  read: true,
  createdAt: "2025-07-15T14:20:00Z",
  icon: Heart,
- color: "text-green-600 bg-green-100",
+ color: "text-[#CDF88D] bg-[#CDF88D]",
  },
 ];
 

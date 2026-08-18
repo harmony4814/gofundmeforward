@@ -30,11 +30,11 @@ export default function AboutPage() {
  return (
  <div className="min-h-screen">
  {/* Hero */}
- <section className="relative overflow-hidden bg-gradient-to-br from-[#052e16] via-[#14532d] to-[#166534] py-24 sm:py-32">
+ <section className="relative overflow-hidden bg-gradient-to-br from-[#CDF88D] via-[#CDF88D] to-[#CDF88D] py-24 sm:py-32">
  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  <div className="text-center">
  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
- <Badge className="mb-6 border-[#22c55e]/30 bg-[#22c55e]/10 text-[#22c55e]">Our Story</Badge>
+ <Badge className="mb-6 border-[#CDF88D]/30 bg-[#CDF88D]/10 text-[#CDF88D]">Our Story</Badge>
  </motion.div>
  <motion.h1
  initial={{ opacity: 0, y: 20 }}
@@ -44,7 +44,7 @@ export default function AboutPage() {
  >
  Making the World a Better Place,
  <br />
- <span className="text-[#22c55e]">One Campaign at a Time</span>
+ <span className="text-[#CDF88D]">One Campaign at a Time</span>
  </motion.h1>
  <motion.p
  initial={{ opacity: 0, y: 20 }}
@@ -52,7 +52,7 @@ export default function AboutPage() {
  transition={{ delay: 0.2 }}
  className="mx-auto mt-6 max-w-3xl text-lg text-gray-300"
  >
- FundForward was founded in 2020 with a simple mission: to connect people who want to
+ gofundme was founded in 2020 with a simple mission: to connect people who want to
  help with the people who need it most. Today, we&apos;ve helped raise over $2 billion for
  causes that matter.
  </motion.p>
@@ -72,7 +72,7 @@ export default function AboutPage() {
  <h2 className="text-3xl font-bold sm:text-4xl">Our Mission</h2>
  <p className="mt-6 text-lg text-gray-600">
  We believe that everyone deserves the chance to pursue their dreams and that no one
- should face hardship alone. FundForward empowers individuals, communities, and
+ should face hardship alone. gofundme empowers individuals, communities, and
  organizations to raise funds for the causes that matter most to them.
  </p>
  <p className="mt-4 text-gray-600">
@@ -89,7 +89,7 @@ export default function AboutPage() {
  { value: "200+", label: "Countries" },
  ].map((stat) => (
  <div key={stat.label}>
- <div className="text-2xl font-bold text-[#22c55e]">{stat.value}</div>
+ <div className="text-2xl font-bold text-[#CDF88D]">{stat.value}</div>
  <div className="text-sm text-gray-500">{stat.label}</div>
  </div>
  ))}
@@ -140,8 +140,8 @@ export default function AboutPage() {
  >
  <Card className="h-full transition-all hover:shadow-md">
  <CardContent className="p-6">
- <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#22c55e]/10">
- <value.icon className="h-6 w-6 text-[#22c55e]" />
+ <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#CDF88D]/10">
+ <value.icon className="h-6 w-6 text-[#CDF88D]" />
  </div>
  <h3 className="mt-4 text-lg font-semibold">{value.title}</h3>
  <p className="mt-2 text-sm text-gray-500">
@@ -166,7 +166,7 @@ export default function AboutPage() {
  >
  <h2 className="text-3xl font-bold sm:text-4xl">Meet Our Team</h2>
  <p className="mt-3 text-gray-500">
- The passionate people behind FundForward
+ The passionate people behind gofundme
  </p>
  </motion.div>
  <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -188,7 +188,7 @@ export default function AboutPage() {
  className="mx-auto h-24 w-24 rounded-full object-cover"
  />
  <h3 className="mt-4 text-lg font-semibold">{member.name}</h3>
- <p className="text-sm text-[#22c55e]">{member.role}</p>
+ <p className="text-sm text-[#CDF88D]">{member.role}</p>
  </CardContent>
  </Card>
  </motion.div>
@@ -207,7 +207,7 @@ export default function AboutPage() {
  </p>
  <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
  <Link href="/create-campaign">
- <Button size="lg" className="bg-[#22c55e] text-white hover:bg-[#16a34a]">
+ <Button size="lg" className="bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]">
  Start a Campaign
  <ArrowRight className="ml-2 h-4 w-4" />
  </Button>

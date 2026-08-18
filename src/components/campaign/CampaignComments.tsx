@@ -187,7 +187,7 @@ function CommentItem({
  <button
  type="button"
  onClick={() => setShowReplies(!showReplies)}
- className="flex items-center gap-1 text-xs font-medium text-green-600 hover:text-green-700 transition-colors"
+ className="flex items-center gap-1 text-xs font-medium text-[#CDF88D] hover:text-[#CDF88D] transition-colors"
  >
  {showReplies ? (
  <ChevronUp className="h-3 w-3" />
@@ -270,7 +270,7 @@ export function CampaignComments({
  <CardContent className="p-4">
  <div className="flex gap-3">
  <Avatar size="sm" className="mt-1">
- <AvatarFallback className="bg-green-100 text-green-700 text-xs">
+ <AvatarFallback className="bg-[#CDF88D] text-[#CDF88D] text-xs">
  Y
  </AvatarFallback>
  </Avatar>

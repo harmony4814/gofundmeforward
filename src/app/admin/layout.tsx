@@ -59,12 +59,12 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const mockLogout = useAuthStore((s) => s.mockLogout);
-  const user = useAuthStore((s) => s.user);
-  const [collapsed, setCollapsed] = useState(false);
+   const logout = useAuthStore((s) => s.logout);
+   const user = useAuthStore((s) => s.user);
+   const [collapsed, setCollapsed] = useState(false);
 
-  const handleLogout = () => {
-    mockLogout();
+   const handleLogout = () => {
+    logout();
     router.push("/login");
   };
 

@@ -32,7 +32,7 @@ export default function LoadingSpinner({
  >
  <div
  className={cn(
- "animate-spin rounded-full border-gray-200 border-t-green-500",
+ "animate-spin rounded-full border-gray-200 border-t-[#CDF88D]",
  SIZE_MAP[size],
  BORDER_MAP[size]
  )}

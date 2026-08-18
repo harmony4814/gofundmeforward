@@ -48,15 +48,15 @@ export default function CategoryDetailPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-[#052e16] via-[#14532d] to-[#166534] py-20">
+      <section className="bg-gradient-to-br from-[#CDF88D] via-[#CDF88D] to-[#CDF88D] py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-4"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#22c55e]/20">
-              <Icon className="h-8 w-8 text-[#22c55e]" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#CDF88D]/20">
+              <Icon className="h-8 w-8 text-[#CDF88D]" />
             </div>
             <div>
               <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">

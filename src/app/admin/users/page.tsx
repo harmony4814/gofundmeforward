@@ -35,7 +35,7 @@ const USERS = [
 ];
 
 const STATUS_STYLES: Record<string, string> = {
- active: "bg-green-100 text-green-700",
+ active: "bg-[#CDF88D] text-[#CDF88D]",
  suspended: "bg-red-100 text-red-700",
 };
 

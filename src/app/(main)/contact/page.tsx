@@ -45,10 +45,10 @@ export default function ContactPage() {
 
  return (
  <div className="min-h-screen">
- <section className="bg-gradient-to-br from-[#052e16] via-[#14532d] to-[#166534] py-20">
+ <section className="bg-gradient-to-br from-[#CDF88D] via-[#CDF88D] to-[#CDF88D] py-20">
  <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
- <Badge className="mb-6 border-[#22c55e]/30 bg-[#22c55e]/10 text-[#22c55e]">
+ <Badge className="mb-6 border-[#CDF88D]/30 bg-[#CDF88D]/10 text-[#CDF88D]">
  <MessageSquare className="mr-1 h-3 w-3" />
  Get in Touch
  </Badge>
@@ -86,8 +86,8 @@ export default function ContactPage() {
  { icon: MapPin, label: "Address", value: "123 Innovation Drive, San Francisco, CA 94102" },
  ].map((item) => (
  <div key={item.label} className="flex items-start gap-3">
- <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#22c55e]/10">
- <item.icon className="h-5 w-5 text-[#22c55e]" />
+ <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#CDF88D]/10">
+ <item.icon className="h-5 w-5 text-[#CDF88D]" />
  </div>
  <div>
  <p className="text-sm font-medium">{item.label}</p>
@@ -138,7 +138,7 @@ export default function ContactPage() {
  key={social.label}
  href="#"
  aria-label={social.label}
- className="flex h-10 w-10 items-center justify-center rounded-xl border transition-colors hover:border-[#22c55e] hover:bg-[#22c55e]/5 hover:text-[#22c55e]"
+ className="flex h-10 w-10 items-center justify-center rounded-xl border transition-colors hover:border-[#CDF88D] hover:bg-[#CDF88D]/5 hover:text-[#CDF88D]"
  >
  {social.svg}
  </a>
@@ -159,8 +159,8 @@ export default function ContactPage() {
  <CardContent className="p-6 sm:p-8">
  {sent ? (
  <div className="flex flex-col items-center py-8 text-center">
- <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#22c55e]/10">
- <CheckCircle className="h-8 w-8 text-[#22c55e]" />
+ <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#CDF88D]/10">
+ <CheckCircle className="h-8 w-8 text-[#CDF88D]" />
  </div>
  <h3 className="mt-4 text-xl font-semibold">Message Sent!</h3>
  <p className="mt-2 text-gray-500">
@@ -222,7 +222,7 @@ export default function ContactPage() {
  </div>
  <Button
  type="submit"
- className="w-full bg-[#22c55e] text-white hover:bg-[#16a34a]"
+ className="w-full bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]"
  size="lg"
  disabled={isLoading}
  >

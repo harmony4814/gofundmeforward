@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import {
   Sheet,
   SheetContent,
@@ -74,11 +75,8 @@ export default function DashboardLayoutClient({
             </SheetTrigger>
             <SheetContent side="left" className="w-72 p-0">
               <SheetHeader className="border-b border-border px-4 py-3">
-                <SheetTitle className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-                    <Heart className="h-4 w-4 text-primary-foreground" fill="currentColor" />
-                  </div>
-                  FundRise
+                <SheetTitle className="flex items-center">
+                  <BrandLogo />
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-0.5 p-2">

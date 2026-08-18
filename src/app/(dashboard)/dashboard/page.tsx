@@ -31,7 +31,7 @@ const STATS = [
  change: "+12.5%",
  trend: "up" as const,
  icon: DollarSign,
- color: "text-green-600 bg-green-100",
+ color: "text-[#CDF88D] bg-[#CDF88D]",
  },
  {
  title: "Total Donors",
@@ -76,7 +76,7 @@ const RECENT_ACTIVITY = [
 ];
 
 const ACTIVITY_COLORS: Record<string, string> = {
- donation: "bg-green-500",
+ donation: "bg-[#CDF88D]",
  update: "bg-blue-500",
  milestone: "bg-amber-500",
  withdrawal: "bg-purple-500",
@@ -111,7 +111,7 @@ export default function DashboardPage() {
  <div className={cn("flex h-10 w-10 items-center justify-center rounded-lg", stat.color)}>
  <stat.icon className="h-5 w-5" />
  </div>
- <div className={cn("flex items-center gap-1 text-xs font-medium", stat.trend === "up" ? "text-green-600" : "text-red-600")}>
+ <div className={cn("flex items-center gap-1 text-xs font-medium", stat.trend === "up" ? "text-[#CDF88D]" : "text-red-600")}>
  {stat.trend === "up" ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
  {stat.change}
  </div>
@@ -203,7 +203,7 @@ export default function DashboardPage() {
  <TableCell className="font-semibold text-foreground">${donation.amount}</TableCell>
  <TableCell className="text-muted-foreground">{new Date(donation.date).toLocaleDateString()}</TableCell>
  <TableCell>
- <Badge variant={donation.status === "completed" ? "default" : "secondary"} className={donation.status === "completed" ? "bg-green-100 text-green-700" : ""}>
+ <Badge variant={donation.status === "completed" ? "default" : "secondary"} className={donation.status === "completed" ? "bg-[#CDF88D] text-[#CDF88D]" : ""}>
  {donation.status}
  </Badge>
  </TableCell>

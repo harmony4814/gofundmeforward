@@ -1,6 +1,7 @@
 "use client"
 
 import { use, useMemo, useState, useCallback } from "react"
+import { motion } from "framer-motion"
 import { notFound } from "next/navigation"
 import {
   CampaignHero,
@@ -8,6 +9,8 @@ import {
   CampaignUpdates,
   CampaignComments,
   CampaignDonationsSection,
+  CampaignSummaryCard,
+  StickySummaryCard,
   StickyDonateCard,
   RelatedCampaigns,
   type DonationItem,
@@ -112,7 +115,38 @@ export default function CampaignDetailPage({
     <div className="min-h-screen pb-20 lg:pb-0">
       <CampaignHero campaign={campaign} />
 
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      {/* Small curved white divider - subtle arc transition below the title */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+        className="relative z-10 -mt-4 w-full"
+      >
+        <svg
+          viewBox="0 0 1440 24"
+          preserveAspectRatio="none"
+          focusable="false"
+          fill="#ffffff"
+          className="pointer-events-none block h-5 w-full"
+        >
+          <path d="M0,20 C360,-4 1080,-4 1440,20 L1440,24 L0,24 Z" />
+        </svg>
+      </motion.div>
+
+      {/* Fundraising Summary - immediately below the curve */}
+      <StickySummaryCard>
+        <CampaignSummaryCard
+          campaign={campaign}
+          raised={raised}
+          donorCount={donorCount}
+          latestDonation={donations[0]}
+          onDonate={() => setDonateModalOpen(true)}
+        />
+      </StickySummaryCard>
+
+      {/* Our Story + Content */}
+      <div className="relative z-10 mx-auto mt-8 max-w-7xl px-4 sm:mt-10 sm:px-6 lg:mt-10 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
           <div className="space-y-8">
             <CampaignStory campaign={campaign} />

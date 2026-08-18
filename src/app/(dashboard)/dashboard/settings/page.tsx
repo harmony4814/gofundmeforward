@@ -134,7 +134,7 @@ export default function SettingsPage() {
  <Label>Email Address</Label>
  <div className="flex items-center gap-2">
  <Input defaultValue="john@example.com" type="email" className="flex-1" />
- <Badge className="bg-green-100 text-green-700">Verified</Badge>
+ <Badge className="bg-[#CDF88D] text-[#CDF88D]">Verified</Badge>
  </div>
  </div>
 
@@ -207,7 +207,7 @@ export default function SettingsPage() {
  <p className="text-sm font-medium text-foreground">Chrome on macOS</p>
  <p className="text-xs text-muted-foreground">San Francisco, CA - Active now</p>
  </div>
- <Badge className="bg-green-100 text-green-700">Current</Badge>
+ <Badge className="bg-[#CDF88D] text-[#CDF88D]">Current</Badge>
  </div>
  <div className="flex items-center justify-between rounded-lg border p-3">
  <div>

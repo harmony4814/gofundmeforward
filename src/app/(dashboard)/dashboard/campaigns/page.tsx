@@ -27,7 +27,7 @@ import { mockCampaigns } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const STATUS_STYLES: Record<string, string> = {
-  active: "bg-green-100 text-green-700",
+  active: "bg-[#CDF88D] text-[#CDF88D]",
   completed: "bg-blue-100 text-blue-700",
   pending: "bg-amber-100 text-amber-700",
   draft: "bg-gray-100 text-gray-700",

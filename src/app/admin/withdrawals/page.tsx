@@ -44,7 +44,7 @@ const WITHDRAWALS = [
 
 const STATUS_STYLES: Record<string, string> = {
  pending: "bg-amber-100 text-amber-700",
- approved: "bg-green-100 text-green-700",
+ approved: "bg-[#CDF88D] text-[#CDF88D]",
  rejected: "bg-red-100 text-red-700",
 };
 
@@ -122,7 +122,7 @@ export default function AdminWithdrawalsPage() {
  <Card>
  <CardContent className="p-4">
  <div className="flex items-center gap-3">
- <div className="flex h-10 w-10 items-center justify-center rounded-lg text-green-600 bg-green-100">
+ <div className="flex h-10 w-10 items-center justify-center rounded-lg text-[#CDF88D] bg-[#CDF88D]">
  <CheckCircle className="h-5 w-5" />
  </div>
  <div>
@@ -233,7 +233,7 @@ export default function AdminWithdrawalsPage() {
  <div className="flex items-center justify-end gap-2">
  <Button
  size="sm"
- className="bg-green-600 text-white hover:bg-green-700"
+ className="bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]"
  onClick={() => handleAction(withdrawal.id, "approve")}
  >
  <Check className="h-3 w-3" />
@@ -285,7 +285,7 @@ export default function AdminWithdrawalsPage() {
  onClick={confirmAction}
  className={cn(
  alertAction === "approve"
- ? "bg-green-600 text-white hover:bg-green-700"
+ ? "bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]"
  : "bg-destructive text-destructive-foreground hover:bg-destructive/90"
  )}
  >

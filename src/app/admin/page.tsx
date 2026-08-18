@@ -22,11 +22,11 @@ import { Separator } from "@/components/ui/separator";
 const STATS = [
  { title: "Total Users", value: "12,847", change: "+340 this month", icon: Users, color: "text-blue-600 bg-blue-100" },
  { title: "Total Campaigns", value: "3,456", change: "+89 this month", icon: Megaphone, color: "text-purple-600 bg-purple-100" },
- { title: "Active Campaigns", value: "1,234", change: "35.7% of total", icon: Activity, color: "text-green-600 bg-green-100" },
+ { title: "Active Campaigns", value: "1,234", change: "35.7% of total", icon: Activity, color: "text-[#CDF88D] bg-[#CDF88D]" },
  { title: "Pending Campaigns", value: "23", change: "Needs review", icon: Clock, color: "text-amber-600 bg-amber-100" },
- { title: "Total Donations", value: "$2.4M", change: "+$180K this month", icon: DollarSign, color: "text-emerald-600 bg-emerald-100" },
+ { title: "Total Donations", value: "$2.4M", change: "+$180K this month", icon: DollarSign, color: "text-[#CDF88D] bg-[#CDF88D]" },
  { title: "Total Withdrawals", value: "$1.8M", change: "+$95K this month", icon: Wallet, color: "text-orange-600 bg-orange-100" },
- { title: "Today's Donations", value: "$4,520", change: "+12.5% vs yesterday", icon: TrendingUp, color: "text-green-600 bg-green-100" },
+ { title: "Today's Donations", value: "$4,520", change: "+12.5% vs yesterday", icon: TrendingUp, color: "text-[#CDF88D] bg-[#CDF88D]" },
  { title: "Monthly Revenue", value: "$72,400", change: "+8.3% vs last month", icon: Calendar, color: "text-indigo-600 bg-indigo-100" },
  { title: "Platform Fees", value: "$24,130", change: "5% of donations", icon: Percent, color: "text-pink-600 bg-pink-100" },
 ];
@@ -51,7 +51,7 @@ const PENDING_CAMPAIGNS = [
 const ACTIVITY_DOT: Record<string, string> = {
  user: "bg-blue-500",
  campaign: "bg-primary",
- donation: "bg-green-500",
+ donation: "bg-[#CDF88D]",
  withdrawal: "bg-amber-500",
  report: "bg-red-500",
 };

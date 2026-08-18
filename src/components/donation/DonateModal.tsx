@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useCallback } from "react"
+import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import {
  Check,
  Heart,
- Lock,
  Loader2,
  ChevronLeft,
  ChevronRight,
@@ -13,10 +13,7 @@ import {
  Mail,
  MessageSquare,
  EyeOff,
- PartyPopper,
  DollarSign,
- Wallet,
- QrCode,
  Copy,
  CheckCircle,
 } from "lucide-react"
@@ -32,7 +29,6 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Separator } from "@/components/ui/separator"
 import { cn, formatCurrency, calculateProgress } from "@/lib/utils"
-import { createClient } from "@/lib/supabase/client"
 import type { DonationItem } from "@/components/shared/CampaignDetailComponents"
 
 interface Campaign {
@@ -71,18 +67,34 @@ function CashAppIcon({ className }: { className?: string }) {
  )
 }
 
+function PayPalIcon({ className }: { className?: string }) {
+ return (
+  <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797H9.603c-.536 0-.99.396-1.073.925L7.076 21.337z" fill="#003087"/>
+   <path d="M18.164 6.499c-.022.144-.046.289-.076.438-.982 5.051-4.342 6.798-8.64 6.798H8.195a1.065 1.065 0 00-1.05 1.135l-.467 2.958-.132.837a.541.541 0 00.53.623h4.248a.9.9 0 00.89-.77l.028-.145.688-4.363.044-.24a.9.9 0 01.89-.77h.56c3.59 0 6.41-1.462 7.218-5.693.338-1.78.163-3.277-.906-4.338a3.54 3.54 0 01-.357-.256l.027.124z" fill="#0070E0"/>
+   <path d="M17.466 3.778c.716.81 1.107 1.963.877 3.428-.017.109-.036.218-.057.328H13.74a.86.86 0 00-.851.745l-.867 5.49-.024.14a.86.86 0 01.85-.745h2.35a1.065 1.065 0 001.05-1.135l.002-.012.604-3.824.038-.238a1.065 1.065 0 00-1.052-1.135h-3.93a.45.45 0 01-.443-.382l-.293-1.855a.45.45 0 01.443-.518H17.466z" fill="#009CDE"/>
+  </svg>
+ )
+}
+
 const paymentMethods = [
- {
-  id: "bitcoin",
-  name: "Bitcoin",
-  icon: BitcoinIcon,
-  description: "Pay with Bitcoin",
- },
  {
   id: "cashapp",
   name: "Cash App",
   icon: CashAppIcon,
   description: "Pay with Cash App",
+ },
+ {
+  id: "paypal",
+  name: "PayPal",
+  icon: PayPalIcon,
+  description: "Pay with PayPal",
+ },
+ {
+  id: "bitcoin",
+  name: "Bitcoin",
+  icon: BitcoinIcon,
+  description: "Optional",
  },
 ]
 
@@ -99,6 +111,7 @@ const slideVariants = {
 }
 
 export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModalProps) {
+ const router = useRouter()
  const [step, setStep] = useState(0)
  const [direction, setDirection] = useState(0)
  const [selectedAmount, setSelectedAmount] = useState<number | null>(null)
@@ -107,40 +120,13 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
  const [email, setEmail] = useState("")
  const [anonymous, setAnonymous] = useState(false)
  const [message, setMessage] = useState("")
- const [paymentMethod, setPaymentMethod] = useState("bitcoin")
- const [isProcessing, setIsProcessing] = useState(false)
- const [isSuccess, setIsSuccess] = useState(false)
- const [copiedAddress, setCopiedAddress] = useState(false)
-
- // Payment settings from admin
- const [bitcoinWallet, setBitcoinWallet] = useState("")
- const [cashappCashtag, setCashappCashtag] = useState("")
- const [qrCodeUrl, setQrCodeUrl] = useState("")
+ const [paymentMethod, setPaymentMethod] = useState("cashapp")
 
  const currency = campaign.currency || "USD"
  const donationAmount = selectedAmount || parseFloat(customAmount) || 0
  const progress = calculateProgress(campaign.raised, campaign.goal)
 
  const stepLabels = ["Amount", "Details", "Payment"]
-
- // Load payment settings
- useEffect(() => {
-  if (!isOpen) return
-  async function loadSettings() {
-   const supabase = createClient()
-   const { data } = await supabase
-    .from("payment_settings")
-    .select("key, value")
-   if (data) {
-    for (const row of data) {
-     if (row.key === "bitcoin_wallet") setBitcoinWallet(row.value || "")
-     if (row.key === "cashapp_cashtag") setCashappCashtag(row.value || "")
-     if (row.key === "payment_qr_code") setQrCodeUrl(row.value || "")
-    }
-   }
-  }
-  loadSettings()
- }, [isOpen])
 
  const canProceed = useMemo(() => {
   switch (step) {
@@ -168,62 +154,20 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
   if (step > 0) goToStep(step - 1)
  }
 
- const handleDonate = async () => {
-  if (!canProceed) return
-  setIsProcessing(true)
-
-  const supabase = createClient()
-
-  // Save donation to Supabase
-  const { data: donationData, error } = await supabase
-   .from("donations")
-   .insert({
-    campaign_id: campaign.id,
-    donor_name: anonymous ? null : name || null,
-    donor_email: email || null,
-    amount: donationAmount,
-    message: message || null,
-    anonymous,
-    payment_method: paymentMethod,
-    payment_status: "pending",
-   })
-   .select()
-   .single()
-
-  // Update campaign raised amount and donor count
-  await supabase.rpc("increment_campaign_stats", {
-    p_campaign_id: campaign.id,
-    p_amount: donationAmount,
-  }).catch(() => {
-   // Fallback: direct update if RPC doesn't exist
-   supabase
-    .from("campaigns")
-    .update({
-     raised: campaign.raised + donationAmount,
-     donors: campaign.donorCount + 1,
-    })
-    .eq("id", campaign.id)
-  })
-
-  setIsProcessing(false)
-
-  if (error) {
-   console.error("Donation save error:", error)
-  }
-
-  const donation: DonationItem = {
-   id: donationData?.id || `donation-${Date.now()}`,
-   donorName: anonymous ? null : name || null,
-   amount: donationAmount,
+ const handleGoToPay = useCallback(() => {
+  const params = new URLSearchParams({
+   cid: campaign.id,
+   amt: String(donationAmount),
+   method: paymentMethod,
    currency,
-   message: message || null,
-   anonymous,
-   createdAt: new Date().toISOString(),
-  }
-
-  setIsSuccess(true)
-  onSuccess(donation)
- }
+   name,
+   email,
+   message,
+   anon: String(anonymous),
+  })
+  onClose()
+  router.push(`/pay?${params.toString()}`)
+ }, [campaign.id, donationAmount, paymentMethod, currency, name, email, message, anonymous, onClose, router])
 
  const handleClose = () => {
   onClose()
@@ -235,11 +179,8 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
    setEmail("")
    setAnonymous(false)
    setMessage("")
-   setPaymentMethod("bitcoin")
-   setIsProcessing(false)
-   setIsSuccess(false)
-   setCopiedAddress(false)
-  }, 300)
+    setPaymentMethod("bitcoin")
+   }, 300)
  }
 
  const selectAmount = (amount: number) => {
@@ -254,16 +195,6 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
    setSelectedAmount(null)
   }
  }
-
- const copyAddress = (text: string) => {
-  navigator.clipboard.writeText(text)
-  setCopiedAddress(true)
-  setTimeout(() => setCopiedAddress(false), 2000)
- }
-
- const currentPaymentInfo = paymentMethod === "bitcoin"
-  ? { label: "Bitcoin Wallet Address", value: bitcoinWallet }
-  : { label: "Cash App Cashtag", value: cashappCashtag ? `$${cashappCashtag}` : "" }
 
  return (
   <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
@@ -302,7 +233,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
      </span>
      <div className="h-2 w-full overflow-hidden rounded-full bg-border">
       <motion.div
-       className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-green-400"
+       className="h-full rounded-full bg-gradient-to-r from-[#CDF88D] to-[#CDF88D]"
        initial={{ width: 0 }}
        animate={{ width: `${progress}%` }}
        transition={{ duration: 0.8, ease: "easeOut" }}
@@ -317,10 +248,10 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
    <Separator className="my-4" />
 
    <div className="mt-auto space-y-2">
-    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-     <Lock className="h-3 w-3" />
-     <span>Secure 256-bit SSL encryption</span>
-    </div>
+     <div className="flex items-center gap-2 text-xs text-muted-foreground">
+      <Check className="h-3 w-3" />
+      <span>Secure 256-bit SSL encryption</span>
+     </div>
     <div className="flex items-center gap-2 text-xs text-muted-foreground">
      <Check className="h-3 w-3" />
      <span>100% goes to the campaign</span>
@@ -332,18 +263,15 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
   <div className="flex flex-1 flex-col min-w-0">
    <DialogHeader className="p-5 pb-0">
     <div className="flex items-center justify-between">
-     <DialogTitle className="text-lg">
-      {isSuccess ? "Thank You!" : "Make a Donation"}
-     </DialogTitle>
-     {!isSuccess && (
+      <DialogTitle className="text-lg">
+       Make a Donation
+      </DialogTitle>
       <span className="text-xs text-muted-foreground font-medium tabular-nums">
        Step {step + 1} of 3
       </span>
-     )}
     </div>
 
     {/* Progress Indicator */}
-    {!isSuccess && (
      <div className="mt-3 flex items-center gap-1">
       {stepLabels.map((label, i) => (
        <div key={label} className="flex flex-1 items-center gap-1">
@@ -352,7 +280,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
           className={cn(
            "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium transition-colors",
            i <= step
-            ? "bg-green-500 text-white"
+            ? "bg-[#CDF88D] text-[#14532d]"
             : "bg-muted text-muted-foreground"
           )}
          >
@@ -375,125 +303,20 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
          <div
           className={cn(
            "mx-1 h-px flex-1 transition-colors",
-           i < step ? "bg-green-500" : "bg-border"
+           i < step ? "bg-[#CDF88D]" : "bg-border"
           )}
          />
         )}
        </div>
       ))}
-     </div>
-    )}
-   </DialogHeader>
+      </div>
+    </DialogHeader>
 
    <Separator className="mt-4" />
 
    {/* Step Content */}
-   <div className="relative min-h-[320px] overflow-x-hidden">
-    <AnimatePresence mode="wait" custom={direction}>
-     {isSuccess ? (
-      <motion.div
-       key="success"
-       initial={{ opacity: 0, scale: 0.9 }}
-       animate={{ opacity: 1, scale: 1 }}
-       className="flex flex-col items-center justify-center p-8 text-center"
-      >
-       <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
-        className="relative mb-6"
-       >
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-         <PartyPopper className="h-10 w-10 text-green-600" />
-        </div>
-       </motion.div>
-
-       <motion.h3
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="text-xl font-bold mb-2"
-       >
-        Donation Recorded!
-       </motion.h3>
-       <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-        className="text-muted-foreground mb-1"
-       >
-        You donated{" "}
-        <span className="font-semibold text-foreground">
-         {formatCurrency(donationAmount, currency)}
-        </span>{" "}
-        to
-       </motion.p>
-       <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
-        className="font-medium text-foreground mb-4"
-       >
-        {campaign.title}
-       </motion.p>
-
-       {/* Show payment details on success */}
-       {currentPaymentInfo.value && (
-        <motion.div
-         initial={{ opacity: 0, y: 10 }}
-         animate={{ opacity: 1, y: 0 }}
-         transition={{ delay: 0.8 }}
-         className="w-full max-w-sm rounded-lg border bg-muted/50 p-4 space-y-3 mb-6"
-        >
-         <p className="text-xs text-muted-foreground text-center">
-          Complete your payment by sending to:
-         </p>
-         {qrCodeUrl && (
-          <div className="flex justify-center">
-           <img
-            src={qrCodeUrl}
-            alt="Payment QR Code"
-            className="h-40 w-40 rounded-lg border bg-white p-2 object-contain"
-           />
-          </div>
-         )}
-         <div>
-          <p className="text-xs text-muted-foreground mb-1">{currentPaymentInfo.label}</p>
-          <div className="flex items-center gap-2 rounded-md bg-background p-2">
-           <p className="flex-1 text-sm font-mono font-medium break-all">{currentPaymentInfo.value}</p>
-           <Button
-            variant="ghost"
-            size="icon-sm"
-            onClick={() => copyAddress(currentPaymentInfo.value)}
-           >
-            {copiedAddress ? <CheckCircle className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-           </Button>
-          </div>
-         </div>
-         <p className="text-xs text-amber-600 text-center">
-          Your donation will be confirmed after payment is verified by admin.
-         </p>
-        </motion.div>
-       )}
-
-       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9 }}
-        className="flex gap-3"
-       >
-        <Button variant="outline" onClick={handleClose}>
-         Close
-        </Button>
-        <Button
-         onClick={handleClose}
-         className="bg-green-600 hover:bg-green-700"
-        >
-         View Campaign
-        </Button>
-       </motion.div>
-      </motion.div>
-     ) : (
+    <div className="relative min-h-[320px] overflow-x-hidden">
+     <AnimatePresence mode="wait" custom={direction}>
       <motion.div
        key={step}
        custom={direction}
@@ -521,7 +344,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
              className={cn(
               "h-12 text-base font-semibold",
               selectedAmount === amount &&
-              "bg-green-600 hover:bg-green-700 text-white"
+              "bg-[#CDF88D] hover:bg-[#CDF88D] text-[#14532d]"
              )}
              onClick={() => selectAmount(amount)}
             >
@@ -548,7 +371,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
             }
             className={cn(
              "h-12 pl-8 text-lg font-semibold",
-             customAmount && "border-green-500 ring-green-500/20"
+             customAmount && "border-[#CDF88D] ring-[#CDF88D]/20"
             )}
            />
           </div>
@@ -558,12 +381,12 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
           <motion.div
            initial={{ opacity: 0, y: -10 }}
            animate={{ opacity: 1, y: 0 }}
-           className="rounded-lg bg-green-50 p-3 text-center"
+           className="rounded-lg bg-[#CDF88D] p-3 text-center"
           >
            <span className="text-sm text-muted-foreground">
             You will donate{" "}
            </span>
-           <span className="text-lg font-bold text-green-600">
+           <span className="text-lg font-bold text-[#CDF88D]">
             {formatCurrency(donationAmount, currency)}
            </span>
           </motion.div>
@@ -574,12 +397,12 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
        {step === 1 && (
         <div className="space-y-4">
          <div className="flex items-center gap-3 rounded-lg bg-muted/50 p-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
-           <DollarSign className="h-5 w-5 text-green-600" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#CDF88D]">
+           <DollarSign className="h-5 w-5 text-[#CDF88D]" />
           </div>
           <div>
            <p className="text-sm text-muted-foreground">Donation amount</p>
-           <p className="font-bold text-green-600">
+           <p className="font-bold text-[#CDF88D]">
             {formatCurrency(donationAmount, currency)}
            </p>
           </div>
@@ -630,7 +453,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
           className={cn(
            "flex w-full items-center gap-3 rounded-lg border p-3 text-left transition-colors",
            anonymous
-            ? "border-green-500 bg-green-50"
+            ? "border-[#CDF88D] bg-[#CDF88D]"
             : "hover:bg-muted/50"
           )}
          >
@@ -638,7 +461,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
            className={cn(
             "flex h-5 w-5 items-center justify-center rounded border transition-colors",
             anonymous
-             ? "border-green-500 bg-green-500 text-white"
+             ? "border-[#CDF88D] bg-[#CDF88D] text-[#14532d]"
              : "border-border"
            )}
           >
@@ -687,7 +510,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
            <span className="text-muted-foreground">
             {anonymous ? "Anonymous" : name || "Donor"}
            </span>
-           <span className="font-bold text-green-600">
+           <span className="font-bold text-[#CDF88D]">
             {formatCurrency(donationAmount, currency)}
            </span>
           </div>
@@ -699,7 +522,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
          </div>
 
          <Label className="text-sm font-medium">
-          Select payment method
+          Choose how to pay
          </Label>
 
          <div className="space-y-2">
@@ -711,7 +534,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
             className={cn(
              "flex w-full items-center gap-4 rounded-lg border p-4 text-left transition-all",
              paymentMethod === method.id
-              ? "border-green-500 bg-green-50 ring-1 ring-green-500/20"
+              ? "border-[#CDF88D] bg-[#CDF88D] ring-1 ring-[#CDF88D]/20"
               : "hover:border-border/80 hover:bg-muted/50"
             )}
            >
@@ -719,12 +542,12 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
              className={cn(
               "flex h-5 w-5 items-center justify-center rounded-full border-2 transition-colors",
               paymentMethod === method.id
-               ? "border-green-500"
+               ? "border-[#CDF88D]"
                : "border-border"
              )}
             >
              {paymentMethod === method.id && (
-              <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
+              <div className="h-2.5 w-2.5 rounded-full bg-[#CDF88D]" />
              )}
             </div>
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
@@ -741,59 +564,13 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
            </button>
           ))}
          </div>
-
-         {/* Show payment details for selected method */}
-         {currentPaymentInfo.value ? (
-          <div className="rounded-lg border bg-muted/30 p-4 space-y-3">
-           <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-            Send payment to:
-           </p>
-           {qrCodeUrl && (
-            <div className="flex justify-center">
-             <div className="h-36 w-36 overflow-hidden rounded-lg border bg-white p-2">
-              <img
-               src={qrCodeUrl}
-               alt="Payment QR Code"
-               className="h-full w-full object-contain"
-              />
-             </div>
-            </div>
-           )}
-           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">{currentPaymentInfo.label}</p>
-            <div className="flex items-center gap-2 rounded-md bg-background p-2">
-             <p className="flex-1 text-sm font-mono font-medium break-all">{currentPaymentInfo.value}</p>
-             <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={() => copyAddress(currentPaymentInfo.value)}
-             >
-              {copiedAddress ? <CheckCircle className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-             </Button>
-            </div>
-           </div>
-          </div>
-         ) : (
-          <div className="rounded-lg bg-amber-50 p-3">
-           <div className="flex items-start gap-2">
-            <Lock className="mt-0.5 h-4 w-4 text-amber-600 shrink-0" />
-            <p className="text-xs text-amber-700">
-             {paymentMethod === "bitcoin"
-              ? "Bitcoin wallet address has not been configured by admin yet."
-              : "Cash App cashtag has not been configured by admin yet."}
-            </p>
-           </div>
-          </div>
-         )}
         </div>
        )}
       </motion.div>
-     )}
-    </AnimatePresence>
-   </div>
+     </AnimatePresence>
+    </div>
 
-   {/* Footer */}
-   {!isSuccess && (
+    {/* Footer */}
     <div className="mt-auto border-t p-5">
      {/* Mobile campaign summary */}
      <div className="mb-4 flex items-center justify-between rounded-lg bg-muted/50 p-3 lg:hidden">
@@ -806,7 +583,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
        </p>
       </div>
       {donationAmount > 0 && (
-       <span className="text-lg font-bold text-green-600">
+       <span className="text-lg font-bold text-[#CDF88D]">
         {formatCurrency(donationAmount, currency)}
        </span>
       )}
@@ -817,7 +594,7 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
        <Button
         variant="outline"
         onClick={handleBack}
-        disabled={isProcessing}
+        disabled={false}
         className="gap-1"
        >
         <ChevronLeft className="h-4 w-4" />
@@ -829,35 +606,24 @@ export function DonateModal({ isOpen, onClose, campaign, onSuccess }: DonateModa
        <Button
         onClick={handleNext}
         disabled={!canProceed}
-        className="gap-1 bg-green-600 hover:bg-green-700 text-white min-w-[140px]"
+        className="gap-1 bg-[#CDF88D] hover:bg-[#CDF88D] text-[#14532d] min-w-[140px] hover:brightness-95"
        >
         Continue
         <ChevronRight className="h-4 w-4" />
        </Button>
       ) : (
        <Button
-        onClick={handleDonate}
-        disabled={isProcessing || !canProceed}
-        className="gap-2 bg-green-600 hover:bg-green-700 text-white min-w-[180px] h-11"
+        onClick={handleGoToPay}
+        disabled={!canProceed}
+        className="bg-[#CDF88D] hover:bg-[#CDF88D] text-[#14532d] min-w-[180px] h-11 hover:brightness-95"
        >
-        {isProcessing ? (
-         <>
-          <Loader2 className="h-4 w-4 animate-spin" />
-          Recording...
-         </>
-        ) : (
-         <>
-          <Heart className="h-4 w-4" />
-          Donate {donationAmount > 0 ? formatCurrency(donationAmount, currency) : "Now"}
-         </>
-        )}
+        Pay {donationAmount > 0 ? formatCurrency(donationAmount, currency) : "Now"}
        </Button>
       )}
+      </div>
      </div>
     </div>
-   )}
-  </div>
-  </div>
+   </div>
   </DialogContent>
   </Dialog>
  )

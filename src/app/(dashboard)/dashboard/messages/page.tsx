@@ -141,7 +141,7 @@ export default function MessagesPage() {
               <p className="text-sm font-medium text-foreground">
                 {CONVERSATIONS.find((c) => c.id === selectedConversation)?.name}
               </p>
-              <p className="text-[11px] text-green-500">Online</p>
+              <p className="text-[11px] text-[#CDF88D]">Online</p>
             </div>
           </div>
 

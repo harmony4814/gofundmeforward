@@ -1,24 +1,23 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect, useCallback, useRef, type ReactNode } from "react"
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
 import {
- MapPin,
- Users,
- Clock,
- Heart,
- Share2,
- Flag,
- Calendar,
- Tag,
- MessageSquare,
- ChevronDown,
- ChevronLeft,
- ChevronRight,
- X,
- Bookmark,
- BookmarkCheck,
- Maximize2,
+  Users,
+  Clock,
+  Heart,
+  Share2,
+  Flag,
+  Calendar,
+  Tag,
+  MessageSquare,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Bookmark,
+  BookmarkCheck,
+  Maximize2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -180,7 +179,7 @@ export function ImageLightbox({ images, initialIndex = 0, isOpen, onClose }: Ima
  className={cn(
  "relative h-12 w-16 overflow-hidden rounded-md transition-all",
  i === currentIndex
- ? "ring-2 ring-[#22c55e] ring-offset-1 ring-offset-black/50 opacity-100"
+ ? "ring-2 ring-[#CDF88D] ring-offset-1 ring-offset-black/50 opacity-100"
  : "opacity-50 hover:opacity-80"
  )}
  >
@@ -243,18 +242,167 @@ export function CircularProgress({
  strokeDasharray={circumference}
  strokeDashoffset={strokeDashoffset}
  strokeLinecap="round"
- className="text-green-500"
+ className="text-[#CDF88D]"
  style={{
  transition: "stroke-dashoffset 1s ease-out",
  }}
  />
  </svg>
- <div className="absolute inset-0 flex flex-col items-center justify-center">
- <span className="text-sm font-bold text-green-600">{Math.round(clampedValue)}%</span>
- {label && <span className="text-[9px] text-muted-foreground">{label}</span>}
- </div>
- </div>
- )
+   <div className="absolute inset-0 flex flex-col items-center justify-center">
+   <span className="text-sm font-bold text-gray-900">{Math.round(clampedValue)}%</span>
+   {label && <span className="text-[9px] text-muted-foreground">{label}</span>}
+   </div>
+  </div>
+  )
+}
+
+// ─── Campaign Summary Card ───────────────────────────────────────────────────
+
+export function CampaignSummaryCard({
+  campaign,
+  raised,
+  donorCount,
+  latestDonation,
+  onDonate,
+}: {
+  campaign: CampaignData
+  raised: number
+  donorCount: number
+  latestDonation?: DonationItem
+  onDonate: () => void
+}) {
+  const [showShare, setShowShare] = useState(false)
+  const progress = calculateProgress(raised, campaign.goal)
+  const campaignUrl =
+  typeof window !== "undefined"
+  ? `${window.location.origin}/campaigns/${campaign.slug}`
+  : ""
+
+  const latest = latestDonation
+  ? {
+  name:
+  latestDonation.anonymous || !latestDonation.donorName
+  ? "Anonymous"
+  : latestDonation.donorName,
+  amount: formatCurrency(
+  latestDonation.amount,
+  latestDonation.currency || campaign.currency
+  ),
+  }
+  : null
+
+  return (
+  <motion.div
+  initial={{ opacity: 0, y: 24 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+  className="rounded-[30px] bg-white px-4 py-3 shadow-[0_16px_40px_-18px_rgba(15,23,42,0.25)] ring-1 ring-black/[0.04] sm:px-5 sm:py-3.5"
+  >
+  {/* Progress + Amounts */}
+  <div className="flex items-center gap-3.5 sm:gap-4">
+  <CircularProgress value={progress} size={52} strokeWidth={5} />
+  <div className="min-w-0 flex-1">
+  <p className="truncate text-[11px] font-medium text-muted-foreground">
+  Raised of {formatCurrency(campaign.goal, campaign.currency)}
+  </p>
+  <motion.p
+  key={raised}
+  initial={{ scale: 1.05 }}
+  animate={{ scale: 1 }}
+  className="text-lg font-extrabold leading-tight text-gray-900 sm:text-xl"
+  >
+  {formatCurrency(raised, campaign.currency)}
+  </motion.p>
+  {latest ? (
+   <p className="truncate text-[11px] text-muted-foreground">
+   {latest.name} donated <span className="font-semibold text-foreground">{latest.amount}</span>
+   </p>
+  ) : (
+   <p className="truncate text-[11px] text-muted-foreground">
+   Be the first to donate
+   </p>
+  )}
+  </div>
+  </div>
+
+  {/* Actions */}
+  <div className="mt-2.5 flex gap-2.5">
+  <Button
+  onClick={onDonate}
+  size="default"
+  className="h-9 flex-1 rounded-full bg-[#CDF88D] px-4 text-sm font-bold text-[#14532d] shadow-sm transition-all hover:bg-[#CDF88D] hover:brightness-95"
+  >
+  Donate
+  </Button>
+  <Button
+  variant="outline"
+  size="default"
+  onClick={() => setShowShare(!showShare)}
+  className="h-9 flex-1 gap-1.5 rounded-full border-[#14532d] bg-[#14532d] px-4 text-sm font-medium text-[#CDF88D] hover:bg-[#174a2e] hover:text-[#CDF88D]"
+  >
+  <Share2 className="h-4 w-4" />
+  Share
+  </Button>
+  </div>
+
+  {showShare && campaignUrl && (
+  <motion.div
+  initial={{ opacity: 0, height: 0 }}
+  animate={{ opacity: 1, height: "auto" }}
+  transition={{ duration: 0.2 }}
+  className="overflow-hidden"
+  >
+  <div className="mt-3 border-t border-gray-100 pt-3">
+  <ShareButtons url={campaignUrl} title={campaign.title} variant="compact" />
+  </div>
+  </motion.div>
+  )}
+  </motion.div>
+  )
+}
+
+// ─── Sticky Summary Card Wrapper ─────────────────────────────────────────────
+
+export function StickySummaryCard({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [showFloating, setShowFloating] = useState(false)
+  const { scrollY } = useScroll()
+
+  useEffect(() => {
+    const el = ref.current
+    if (el) setShowFloating(el.getBoundingClientRect().bottom < 0)
+  }, [])
+
+  useMotionValueEvent(scrollY, "change", () => {
+    const el = ref.current
+    if (!el) return
+    const visible = el.getBoundingClientRect().bottom < 0
+    setShowFloating((prev) => (prev === visible ? prev : visible))
+  })
+
+  return (
+  <>
+  {/* In-flow summary card - scrolls away completely */}
+  <div ref={ref} className="mx-auto mt-4 w-[93%] max-w-4xl sm:mt-6">
+  {children}
+  </div>
+
+  {/* Floating version - slides up from the bottom once scrolled past */}
+  <AnimatePresence>
+  {showFloating && (
+  <motion.div
+  initial={{ opacity: 0, y: 120 }}
+  animate={{ opacity: 1, y: 0 }}
+  exit={{ opacity: 0, y: 120 }}
+  transition={{ type: "spring", stiffness: 320, damping: 30 }}
+  className="fixed bottom-4 left-1/2 z-40 w-[92%] max-w-lg -translate-x-1/2"
+  >
+  {children}
+  </motion.div>
+  )}
+  </AnimatePresence>
+  </>
+  )
 }
 
 // ─── Campaign Hero ───────────────────────────────────────────────────────────
@@ -305,8 +453,8 @@ export function CampaignHero({ campaign }: CampaignHeroProps) {
 
  return (
  <>
- <section
- className="relative h-[350px] overflow-hidden sm:h-[480px] md:h-[520px]"
+   <section
+   className="relative h-[48vh] min-h-[380px] overflow-hidden sm:h-[500px] md:h-[540px]"
  onTouchStart={handleTouchStart}
  onTouchMove={handleTouchMove}
  onTouchEnd={handleTouchEnd}
@@ -350,91 +498,54 @@ export function CampaignHero({ campaign }: CampaignHeroProps) {
  </>
  )}
 
- {/* Dots Navigation */}
- {images.length > 1 && (
- <div className="absolute bottom-24 left-1/2 z-10 flex -translate-x-1/2 gap-2 sm:bottom-28">
- {images.map((_, i) => (
- <button
- key={i}
- onClick={() => setCurrentSlide(i)}
- className={cn(
- "h-2 rounded-full transition-all duration-300",
- i === currentSlide ? "w-6 bg-[#22c55e]" : "w-2 bg-white/50 hover:bg-white/80"
- )}
- />
- ))}
- </div>
- )}
+  {/* Top Overlays: Lightbox, Favorite, Share */}
+  <div className="absolute top-4 left-0 right-0 z-10 flex items-center justify-between px-4 sm:px-6">
+  <button
+  onClick={() => openLightbox(currentSlide)}
+  className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
+  >
+  <Maximize2 className="h-4 w-4" />
+  </button>
+  <div className="flex items-center gap-2">
+  <button
+  onClick={() => setIsFavorited(!isFavorited)}
+  className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
+  >
+  {isFavorited ? (
+  <BookmarkCheck className="h-4 w-4 fill-[#CDF88D] text-[#CDF88D]" />
+  ) : (
+  <Bookmark className="h-4 w-4" />
+  )}
+  </button>
+  <button className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60">
+  <Share2 className="h-4 w-4" />
+  </button>
+  </div>
+  </div>
 
- {/* Thumbnail Strip */}
- {images.length > 1 && (
- <div className="absolute bottom-16 left-1/2 z-10 hidden -translate-x-1/2 gap-1.5 sm:flex">
- {images.map((img, i) => (
- <button
- key={i}
- onClick={() => setCurrentSlide(i)}
- className={cn(
- "relative h-10 w-14 overflow-hidden rounded-md border-2 transition-all",
- i === currentSlide
- ? "border-[#22c55e] opacity-100"
- : "border-transparent opacity-50 hover:opacity-80"
- )}
- >
- <img src={img} alt="" className="h-full w-full object-cover" />
- </button>
- ))}
- </div>
- )}
-
- {/* Lightbox Button */}
- <button
- onClick={() => openLightbox(currentSlide)}
- className="absolute bottom-16 right-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:bottom-28 sm:h-9 sm:w-9"
- >
- <Maximize2 className="h-4 w-4" />
- </button>
-
- {/* Top Overlays: Share, Favorite */}
- <div className="absolute top-4 left-0 right-0 z-10 flex items-center justify-end px-4 sm:px-6">
- <div className="flex items-center gap-2">
- <button
- onClick={() => setIsFavorited(!isFavorited)}
- className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
- >
- {isFavorited ? (
- <BookmarkCheck className="h-4 w-4 fill-[#22c55e] text-[#22c55e]" />
- ) : (
- <Bookmark className="h-4 w-4" />
- )}
- </button>
- <button className="flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60">
- <Share2 className="h-4 w-4" />
- </button>
- </div>
- </div>
-
- {/* Bottom Title Overlay */}
- <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10">
- <div className="mx-auto max-w-7xl">
- <Badge className="mb-3 bg-[#22c55e] text-white">{campaign.category}</Badge>
- <h1 className="text-xl font-extrabold text-white sm:text-3xl md:text-4xl">{campaign.title}</h1>
- <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-gray-300">
- <div className="flex items-center gap-1">
- <MapPin className="h-4 w-4" />
- {campaign.country}
- </div>
- <div className="flex items-center gap-1">
- <Users className="h-4 w-4" />
- {campaign.donorCount} donors
- </div>
- <div className="flex items-center gap-1">
- <Clock className="h-4 w-4" />
- {daysLeft} days left
- </div>
- </div>
- </div>
- </div>
- </section>
+  {/* Bottom Title + Slider Dots Overlay */}
+  <div className="absolute inset-x-0 bottom-0 flex items-end justify-center px-4 pb-6 sm:px-6 sm:pb-8 md:px-10 md:pb-10">
+  <div className="mx-auto w-full max-w-4xl text-center">
+  <h1 className="text-xl font-extrabold text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)] sm:text-3xl md:text-4xl">{campaign.title}</h1>
+  {images.length > 1 && (
+  <div className="mt-3 flex items-center justify-center gap-1.5">
+  {images.map((_, i) => (
+  <button
+  key={i}
+  aria-label={`Go to image ${i + 1}`}
+  onClick={() => setCurrentSlide(i)}
+  className={`h-1.5 rounded-full transition-all duration-300 ${
+  i === currentSlide
+  ? "w-5 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.5)]"
+  : "w-1.5 bg-white/50 hover:bg-white/80"
+  }`}
+  />
+  ))}
+  </div>
+  )}
+  </div>
+  </div>
+  </section>
 
  {/* Lightbox */}
  <ImageLightbox
@@ -482,7 +593,7 @@ export function CampaignStory({ campaign }: { campaign: CampaignData }) {
  <Button
  variant="ghost"
  onClick={() => setExpanded(!expanded)}
- className="mt-2 gap-1 text-[#22c55e] hover:text-[#16a34a] hover:bg-green-50"
+ className="mt-2 gap-1 text-[#CDF88D] hover:text-[#CDF88D] hover:bg-[#CDF88D]"
  >
  {expanded ? (
  <>
@@ -600,7 +711,7 @@ export function CampaignComments() {
  <CardContent className="space-y-6">
  <div className="flex gap-3">
  <Input placeholder="Write a comment..." className="flex-1" />
- <Button className="bg-[#22c55e] text-white hover:bg-[#16a34a]">Post</Button>
+ <Button className="bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]">Post</Button>
  </div>
  {comments.map((comment) => (
  <div key={comment.id} className="flex gap-3">
@@ -616,7 +727,7 @@ export function CampaignComments() {
  <p className="mt-1 text-sm text-gray-600">
  {comment.content}
  </p>
- <button className="mt-1 flex items-center gap-1 text-xs text-gray-500 hover:text-[#22c55e]">
+ <button className="mt-1 flex items-center gap-1 text-xs text-gray-500 hover:text-[#CDF88D]">
  <Heart className="h-3 w-3" />
  {comment.likes}
  </button>
@@ -690,7 +801,7 @@ export function CampaignDonationsSection({
  "text-xs font-medium",
  isAnon
  ? "bg-muted text-muted-foreground"
- : "bg-green-100 text-green-700"
+ : "bg-[#CDF88D] text-[#CDF88D]"
  )}
  >
  {initials}
@@ -704,7 +815,7 @@ export function CampaignDonationsSection({
  {formatRelativeTime(donation.createdAt)}
  </span>
  </div>
- <p className="text-sm font-bold text-green-600 mt-0.5">
+  <p className="text-sm font-bold text-[#14532d] mt-0.5">
  {formatCurrency(donation.amount, donation.currency || currency)}
  </p>
  {donation.message && (
@@ -723,7 +834,7 @@ export function CampaignDonationsSection({
  {sorted.length > 8 && !showAll && (
  <button
  onClick={() => setShowAll(true)}
- className="flex w-full items-center justify-center gap-1 py-3 text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
+ className="flex w-full items-center justify-center gap-1 py-3 text-sm font-medium text-[#CDF88D] hover:text-[#CDF88D] transition-colors"
  >
  View all {sorted.length} donations
  <ChevronDown className="h-4 w-4" />
@@ -785,7 +896,7 @@ export function StickyDonateCard({
  key={raised}
  initial={{ scale: 1.1 }}
  animate={{ scale: 1 }}
- className="text-2xl font-bold text-[#22c55e]"
+  className="text-2xl font-bold text-gray-900"
  >
  {formatCurrency(raised, campaign.currency)}
  </motion.span>
@@ -795,7 +906,7 @@ export function StickyDonateCard({
  </div>
  <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-200">
  <motion.div
- className="h-full rounded-full bg-gradient-to-r from-[#22c55e] to-[#16a34a]"
+ className="h-full rounded-full bg-gradient-to-r from-[#CDF88D] to-[#CDF88D]"
  initial={{ width: 0 }}
  animate={{ width: `${progress}%` }}
  transition={{ duration: 0.8, ease: "easeOut" }}
@@ -832,20 +943,19 @@ export function StickyDonateCard({
  </div>
 
  {/* Donate Button - GoFundMe Style */}
- <Button
- onClick={onDonate}
- size="lg"
- className="w-full h-13 text-base font-bold gap-2 bg-[#22c55e] hover:bg-[#16a34a] text-white shadow-md hover:shadow-lg transition-all rounded-full"
- >
- <Heart className="h-5 w-5 fill-current" />
- Donate Now
- </Button>
+  <Button
+  onClick={onDonate}
+  size="lg"
+  className="w-full h-13 text-base font-bold bg-[#CDF88D] hover:bg-[#CDF88D] text-[#14532d] shadow-md hover:shadow-lg transition-all rounded-full hover:brightness-95"
+  >
+  Donate Now
+  </Button>
 
  {/* Share Button */}
  <Button
  variant="outline"
  size="default"
- className="w-full gap-2 h-11 font-medium border-gray-300"
+ className="w-full gap-2 h-11 font-medium border-[#14532d] bg-[#14532d] text-[#CDF88D] hover:bg-[#174a2e] hover:text-[#CDF88D]"
  onClick={() => setShowShare(!showShare)}
  >
  <Share2 className="h-4 w-4" />
@@ -900,39 +1010,12 @@ export function StickyDonateCard({
  </div>
  </div>
  </div>
- </Card>
- </motion.div>
- </div>
- </div>
-
- {/* Mobile Fixed Bottom Bar */}
- <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 safe-area-bottom">
- <div className="mx-auto flex items-center gap-3 px-4 py-3 max-w-lg">
- <div className="flex-1 min-w-0">
- <p className="text-sm font-bold text-[#22c55e] truncate">
- {formatCurrency(raised, campaign.currency)}
- </p>
- <p className="text-xs text-muted-foreground truncate">
- of {formatCurrency(campaign.goal, campaign.currency)} &middot; {daysLeft}d left
- </p>
- <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-muted">
- <div
- className="h-full rounded-full bg-gradient-to-r from-[#22c55e] to-[#16a34a] transition-all duration-500"
- style={{ width: `${progress}%` }}
- />
- </div>
- </div>
- <Button
- onClick={onDonate}
- className="shrink-0 bg-[#22c55e] hover:bg-[#16a34a] text-white h-12 px-6 gap-2 font-bold rounded-full shadow-md"
- >
- <Heart className="h-4 w-4 fill-current" />
- Donate
- </Button>
- </div>
- </div>
- </>
- )
+  </Card>
+  </motion.div>
+  </div>
+  </div>
+  </>
+  )
 }
 
 // ─── Related Campaigns ───────────────────────────────────────────────────────
@@ -966,11 +1049,11 @@ export function RelatedCampaigns({
   />
  </div>
  <CardContent className="space-y-2 p-4">
- <h3 className="line-clamp-1 font-semibold group-hover:text-[#22c55e]">
+ <h3 className="line-clamp-1 font-semibold group-hover:text-[#CDF88D]">
  {campaign.title}
  </h3>
  <div className="flex items-center justify-between text-sm">
- <span className="font-semibold text-[#22c55e]">
+ <span className="font-semibold text-[#CDF88D]">
  {formatCurrency(campaign.raised)}
  </span>
  <span className="text-gray-500">

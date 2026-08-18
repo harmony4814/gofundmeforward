@@ -22,10 +22,10 @@ export default function FAQPage() {
 
  return (
  <div className="min-h-screen">
- <section className="bg-gradient-to-br from-[#052e16] via-[#14532d] to-[#166534] py-20">
+ <section className="bg-gradient-to-br from-[#CDF88D] via-[#CDF88D] to-[#CDF88D] py-20">
  <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
- <BadgeComponent className="mb-6 border-[#22c55e]/30 bg-[#22c55e]/10 text-[#22c55e]">
+ <BadgeComponent className="mb-6 border-[#CDF88D]/30 bg-[#CDF88D]/10 text-[#CDF88D]">
  <HelpCircle className="mr-1 h-3 w-3" />
  Help Center
  </BadgeComponent>
@@ -33,7 +33,7 @@ export default function FAQPage() {
  Frequently Asked Questions
  </h1>
  <p className="mx-auto mt-4 max-w-xl text-lg text-gray-300">
- Find answers to the most common questions about FundForward
+ Find answers to the most common questions about gofundme
  </p>
  </motion.div>
  </div>

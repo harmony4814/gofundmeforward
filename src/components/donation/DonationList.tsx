@@ -91,7 +91,7 @@ export function DonationList({
  "text-xs font-medium",
  isAnonymous
  ? "bg-muted text-muted-foreground"
- : "bg-green-100 text-green-700"
+ : "bg-[#CDF88D] text-[#CDF88D]"
  )}
  >
  {initials}
@@ -108,7 +108,7 @@ export function DonationList({
  </span>
  </div>
 
- <p className="text-sm font-bold text-green-600 mt-0.5">
+ <p className="text-sm font-bold text-[#CDF88D] mt-0.5">
  {formatCurrency(donation.amount, donation.currency || currency)}
  </p>
 

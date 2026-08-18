@@ -71,7 +71,7 @@ export function ShareButtons({
    name: "WhatsApp",
    icon: MessageCircle,
    url: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
-   color: "hover:bg-green-600 hover:text-white",
+   color: "hover:bg-[#CDF88D] hover:text-white",
   },
   {
    name: "Telegram",
@@ -133,7 +133,7 @@ export function ShareButtons({
      aria-label="Copy link"
     >
      {copied ? (
-      <Check className="h-4 w-4 text-green-500" />
+      <Check className="h-4 w-4 text-[#CDF88D]" />
      ) : (
       <LinkIcon className="h-4 w-4" />
      )}
@@ -188,7 +188,7 @@ export function ShareButtons({
      aria-label="Copy link"
     >
      {copied ? (
-      <Check className="h-3.5 w-3.5 text-green-500" />
+      <Check className="h-3.5 w-3.5 text-[#CDF88D]" />
      ) : (
       <LinkIcon className="h-3.5 w-3.5" />
      )}
@@ -236,7 +236,7 @@ export function ShareButtons({
     >
      {copied ? (
       <>
-       <Check className="h-4 w-4 text-green-500" />
+       <Check className="h-4 w-4 text-[#CDF88D]" />
        Copied!
       </>
      ) : (

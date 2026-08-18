@@ -35,13 +35,13 @@ export default function MobileNav() {
  <div
  className={cn(
  "flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all",
- "bg-green-500 text-white hover:bg-green-600 hover:shadow-xl hover:scale-105",
+ "bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D] hover:shadow-xl hover:scale-105",
  "active:scale-95"
  )}
  >
  <Plus className="h-6 w-6" />
  </div>
- <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-medium text-green-500">
+ <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-medium text-[#CDF88D]">
  {tab.label}
  </span>
  </Link>
@@ -58,7 +58,7 @@ export default function MobileNav() {
  className={cn(
  "h-5 w-5 transition-colors",
  is_active
- ? "text-green-500"
+ ? "text-[#CDF88D]"
  : "text-gray-400 group-hover:text-gray-600"
  )}
  />
@@ -66,7 +66,7 @@ export default function MobileNav() {
  className={cn(
  "text-[10px] font-medium transition-colors",
  is_active
- ? "text-green-500"
+ ? "text-[#CDF88D]"
  : "text-gray-400"
  )}
  >

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fundrise.com"
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://gofundme.com"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

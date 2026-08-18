@@ -1,194 +1,191 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { User, Profile } from "@/types";
-import { createClient } from "@/lib/supabase/client";
 
-interface AuthState {
-  user: User | null;
-  profile: Profile | null;
-  isLoading: boolean;
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  logout: () => Promise<void>;
-  loadUser: () => Promise<void>;
-  setUser: (user: User | null) => void;
-  setProfile: (profile: Profile | null) => void;
-  setLoading: (loading: boolean) => void;
+interface StoredUser {
+ id: string;
+ email: string;
+ password: string;
+ name: string;
+ role: "user" | "admin";
+ createdAt: string;
 }
 
-async function fetchProfile(supabase: ReturnType<typeof createClient>, userId: string): Promise<Profile | null> {
-  const { data } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", userId)
-    .single();
+interface AuthState {
+ user: User | null;
+ profile: Profile | null;
+ isLoading: boolean;
+ login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+ register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+ logout: () => Promise<void>;
+ loadUser: () => Promise<void>;
+ setUser: (user: User | null) => void;
+ setProfile: (profile: Profile | null) => void;
+ setLoading: (loading: boolean) => void;
+}
 
-  if (!data) return null;
+const USERS_KEY = "ff_users";
+const SESSION_KEY = "ff_session";
 
-  const { count: campaignCount } = await supabase
-    .from("campaigns")
-    .select("*", { count: "exact", head: true })
-    .eq("creator_id", userId);
+const DEFAULT_ADMIN: StoredUser = {
+ id: "admin-001",
+ email: "admin@gofundme.com",
+ password: "Admin123!",
+ name: "Admin",
+ role: "admin",
+ createdAt: "2024-01-01T00:00:00.000Z",
+};
 
-  const { count: donationCount } = await supabase
-    .from("donations")
-    .select("*", { count: "exact", head: true })
-    .eq("donor_email", data.email);
+function getUsers(): StoredUser[] {
+ if (typeof window === "undefined") return [DEFAULT_ADMIN];
+ try {
+  const raw = localStorage.getItem(USERS_KEY);
+  const users: StoredUser[] = raw ? JSON.parse(raw) : [];
+  if (!users.find((u) => u.email === DEFAULT_ADMIN.email)) {
+   users.push(DEFAULT_ADMIN);
+  }
+  return users;
+ } catch {
+  return [DEFAULT_ADMIN];
+ }
+}
 
-  const { data: raisedData } = await supabase
-    .from("campaigns")
-    .select("raised")
-    .eq("creator_id", userId);
+function saveUsers(users: StoredUser[]) {
+ localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
 
-  const { data: donatedData } = await supabase
-    .from("donations")
-    .select("amount")
-    .eq("donor_email", data.email);
+function getSession(): StoredUser | null {
+ if (typeof window === "undefined") return null;
+ try {
+  const raw = localStorage.getItem(SESSION_KEY);
+  return raw ? JSON.parse(raw) : null;
+ } catch {
+  return null;
+ }
+}
 
-  return {
-    userId: data.id,
-    displayName: data.full_name || "",
-    avatar: data.avatar_url,
-    bio: data.bio,
-    location: null,
-    website: null,
-    socialLinks: null,
-    totalRaised: raisedData?.reduce((sum, c) => sum + (Number(c.raised) || 0), 0) || 0,
-    totalDonated: donatedData?.reduce((sum, d) => sum + (Number(d.amount) || 0), 0) || 0,
-    campaignCount: campaignCount || 0,
-    donationCount: donationCount || 0,
-  };
+function setSession(user: StoredUser | null) {
+ if (user) {
+  localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+ } else {
+  localStorage.removeItem(SESSION_KEY);
+ }
+}
+
+function toUser(u: StoredUser): User {
+ return {
+  id: u.id,
+  email: u.email,
+  name: u.name,
+  avatar: null,
+  bio: null,
+  location: null,
+  phone: null,
+  role: u.role,
+  emailVerified: true,
+  twoFactorEnabled: false,
+  createdAt: u.createdAt,
+  updatedAt: u.createdAt,
+ };
+}
+
+function toProfile(u: StoredUser): Profile {
+ return {
+  userId: u.id,
+  displayName: u.name,
+  avatar: null,
+  bio: null,
+  location: null,
+  website: null,
+  socialLinks: null,
+  totalRaised: 0,
+  totalDonated: 0,
+  campaignCount: 0,
+  donationCount: 0,
+ };
 }
 
 export const useAuthStore = create<AuthState>()(
-  persist(
-    (set) => ({
-      user: null,
-      profile: null,
-      isLoading: true,
+ persist(
+  (set) => ({
+   user: null,
+   profile: null,
+   isLoading: true,
 
-      login: async (email, password) => {
-        const supabase = createClient();
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
+   login: async (email, password) => {
+    const users = getUsers();
+    const found = users.find(
+     (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
+    );
+    if (!found) return { success: false, error: "Invalid email or password" };
 
-        if (error) return { success: false, error: error.message };
+    const user = toUser(found);
+    const profile = toProfile(found);
+    setSession(found);
+    set({ user, profile, isLoading: false });
+    return { success: true };
+   },
 
-        const { data: profileData } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", data.user.id)
-          .single();
-
-        const user: User = {
-          id: data.user.id,
-          email: data.user.email || "",
-          name: profileData?.full_name || data.user.email || "",
-          avatar: profileData?.avatar_url || null,
-          bio: profileData?.bio || null,
-          location: null,
-          phone: null,
-          role: (profileData?.role as "user" | "admin") || "user",
-          emailVerified: !!data.user.confirmed_at,
-          twoFactorEnabled: false,
-          createdAt: data.user.created_at,
-          updatedAt: data.user.updated_at || data.user.created_at,
-        };
-
-        const profile = await fetchProfile(supabase, data.user.id);
-        set({ user, profile, isLoading: false });
-        return { success: true };
-      },
-
-      register: async (name, email, password) => {
-        const supabase = createClient();
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: { full_name: name },
-          },
-        });
-
-        if (error) return { success: false, error: error.message };
-
-        if (data.user) {
-          const user: User = {
-            id: data.user.id,
-            email: data.user.email || "",
-            name,
-            avatar: null,
-            bio: null,
-            location: null,
-            phone: null,
-            role: "user",
-            emailVerified: false,
-            twoFactorEnabled: false,
-            createdAt: data.user.created_at,
-            updatedAt: data.user.created_at,
-          };
-          set({ user, profile: null, isLoading: false });
-        }
-
-        return { success: true };
-      },
-
-      logout: async () => {
-        const supabase = createClient();
-        await supabase.auth.signOut();
-        set({ user: null, profile: null, isLoading: false });
-      },
-
-      loadUser: async () => {
-        try {
-          const supabase = createClient();
-          const { data: { user: sbUser } } = await supabase.auth.getUser();
-
-          if (!sbUser) {
-            set({ user: null, profile: null, isLoading: false });
-            return;
-          }
-
-          const { data: profileData } = await supabase
-            .from("profiles")
-            .select("*")
-            .eq("id", sbUser.id)
-            .single();
-
-          const user: User = {
-            id: sbUser.id,
-            email: sbUser.email || "",
-            name: profileData?.full_name || sbUser.email || "",
-            avatar: profileData?.avatar_url || null,
-            bio: profileData?.bio || null,
-            location: null,
-            phone: null,
-            role: (profileData?.role as "user" | "admin") || "user",
-            emailVerified: !!sbUser.confirmed_at,
-            twoFactorEnabled: false,
-            createdAt: sbUser.created_at,
-            updatedAt: sbUser.updated_at || sbUser.created_at,
-          };
-
-          const profile = await fetchProfile(supabase, sbUser.id);
-          set({ user, profile, isLoading: false });
-        } catch {
-          set({ user: null, profile: null, isLoading: false });
-        }
-      },
-
-      setUser: (user) => set({ user }),
-      setProfile: (profile) => set({ profile }),
-      setLoading: (isLoading) => set({ isLoading }),
-    }),
-    {
-      name: "auth-storage",
-      partialize: (state) => ({
-        user: state.user,
-        profile: state.profile,
-      }),
+   register: async (name, email, password) => {
+    const users = getUsers();
+    if (users.find((u) => u.email.toLowerCase() === email.toLowerCase())) {
+     return { success: false, error: "An account with this email already exists" };
     }
-  )
+
+    const newUser: StoredUser = {
+     id: `user-${Date.now()}`,
+     email,
+     password,
+     name,
+     role: "user",
+     createdAt: new Date().toISOString(),
+    };
+
+    users.push(newUser);
+    saveUsers(users);
+
+    const user = toUser(newUser);
+    const profile = toProfile(newUser);
+    setSession(newUser);
+    set({ user, profile, isLoading: false });
+    return { success: true };
+   },
+
+   logout: async () => {
+    setSession(null);
+    set({ user: null, profile: null, isLoading: false });
+   },
+
+   loadUser: async () => {
+    try {
+     const session = getSession();
+     if (!session) {
+      set({ user: null, profile: null, isLoading: false });
+      return;
+     }
+     const users = getUsers();
+     const current = users.find((u) => u.id === session.id);
+     if (!current) {
+      setSession(null);
+      set({ user: null, profile: null, isLoading: false });
+      return;
+     }
+     set({ user: toUser(current), profile: toProfile(current), isLoading: false });
+    } catch {
+     set({ user: null, profile: null, isLoading: false });
+    }
+   },
+
+   setUser: (user) => set({ user }),
+   setProfile: (profile) => set({ profile }),
+   setLoading: (isLoading) => set({ isLoading }),
+  }),
+  {
+   name: "auth-storage",
+   partialize: (state) => ({
+    user: state.user,
+    profile: state.profile,
+   }),
+  }
+ )
 );

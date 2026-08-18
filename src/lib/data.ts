@@ -105,6 +105,49 @@ const coverImages = [
   "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&q=80",
 ]
 
+export const heroImages = [
+ {
+  src: coverImages[0],
+  alt: "Medical support for a family in need",
+  label: "Medical",
+  rotate: "-rotate-3",
+  offset: "",
+  delay: 0,
+ },
+ {
+  src: coverImages[1],
+  alt: "Volunteers building a school",
+  label: "Education",
+  rotate: "rotate-2",
+  offset: "sm:mt-12",
+  delay: 1.4,
+ },
+ {
+  src: coverImages[6],
+  alt: "Volunteers caring for rescued animals",
+  label: "Animal Rescue",
+  rotate: "-rotate-2",
+  offset: "sm:mt-3",
+  delay: 2.8,
+ },
+ {
+  src: coverImages[8],
+  alt: "Community garden and neighborhood projects",
+  label: "Community",
+  rotate: "rotate-3",
+  offset: "sm:mt-14",
+  delay: 0.7,
+ },
+ {
+  src: coverImages[9],
+  alt: "Disaster relief and recovery efforts",
+  label: "Relief",
+  rotate: "-rotate-2",
+  offset: "sm:mt-6",
+  delay: 2.1,
+ },
+]
+
 const avatarImages = [
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
@@ -640,13 +683,13 @@ export const testimonials: TestimonialData[] = [
 ]
 
 export const faqData: FAQData[] = [
-  { id: "1", question: "What is FundForward?", answer: "FundForward is a crowdfunding platform that helps people raise money for causes they care about. Whether it's a personal emergency, a community project, or a creative endeavor, we provide the tools and platform to connect campaign creators with generous donors.", category: "General" },
-  { id: "2", question: "How does FundForward work?", answer: "Campaign creators set up a page telling their story, setting a fundraising goal, and sharing their campaign. Donors can then contribute any amount they choose. Funds are collected and disbursed to the campaign creator based on the chosen payout schedule.", category: "General" },
-  { id: "3", question: "Is FundForward available internationally?", answer: "Yes! FundForward operates in over 200 countries. We support multiple currencies and payment methods to make donating accessible to everyone, everywhere.", category: "General" },
+  { id: "1", question: "What is gofundme?", answer: "gofundme is a crowdfunding platform that helps people raise money for causes they care about. Whether it's a personal emergency, a community project, or a creative endeavor, we provide the tools and platform to connect campaign creators with generous donors.", category: "General" },
+  { id: "2", question: "How does gofundme work?", answer: "Campaign creators set up a page telling their story, setting a fundraising goal, and sharing their campaign. Donors can then contribute any amount they choose. Funds are collected and disbursed to the campaign creator based on the chosen payout schedule.", category: "General" },
+  { id: "3", question: "Is gofundme available internationally?", answer: "Yes! gofundme operates in over 200 countries. We support multiple currencies and payment methods to make donating accessible to everyone, everywhere.", category: "General" },
   { id: "4", question: "How do I start a campaign?", answer: "Click the 'Start a Campaign' button and follow our step-by-step guide. You'll need to provide a title, description, story, goal amount, and cover image. Our guided process makes it easy to set up a compelling campaign in minutes.", category: "Campaigns" },
   { id: "5", question: "What makes a successful campaign?", answer: "Successful campaigns typically have a compelling personal story, a clear and realistic funding goal, high-quality photos or videos, regular updates for donors, and active sharing on social media. Being transparent about how funds will be used builds trust with potential donors.", category: "Campaigns" },
   { id: "6", question: "Can I update my campaign after publishing?", answer: "Yes! You can post updates, add new photos, and modify your campaign details at any time. Regular updates keep donors engaged and informed about your progress.", category: "Campaigns" },
-  { id: "7", question: "What are the fees?", answer: "FundForward charges a 5% platform fee on all donations, plus standard payment processing fees (typically 2.9% + $0.30 per transaction for credit cards). There are no hidden fees or charges.", category: "Donations" },
+  { id: "7", question: "What are the fees?", answer: "gofundme charges a 5% platform fee on all donations, plus standard payment processing fees (typically 2.9% + $0.30 per transaction for credit cards). There are no hidden fees or charges.", category: "Donations" },
   { id: "8", question: "Can I donate anonymously?", answer: "Yes, donors can choose to make their donation anonymous. Your name and profile will not be publicly displayed on the campaign page, though the campaign creator can see it for their records.", category: "Donations" },
   { id: "9", question: "When do campaign creators receive funds?", answer: "Campaign creators can choose between two payout options: immediate payouts (funds are transferred as they're received) or goal-based payouts (funds are released once the campaign reaches its goal). Both options have a standard 3-5 business day processing time.", category: "Donations" },
   { id: "10", question: "Can I get a refund on my donation?", answer: "Donations are generally non-refundable once a campaign has received them. However, if a campaign hasn't reached its goal and you need to request a refund, please contact our support team within 14 days of your donation.", category: "Donations" },
@@ -665,8 +708,8 @@ export const siteStats = {
 }
 
 export const navLinks = [
-  { label: "Explore", href: "/categories" },
-  { label: "How It Works", href: "/about" },
+  { label: "Donate", href: "/categories" },
+  { label: "Fundraise", href: "/about" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ]

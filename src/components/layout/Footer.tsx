@@ -1,6 +1,6 @@
 import Link from "next/link"
-import { Heart } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
+import { BrandLogo } from "@/components/shared/BrandLogo"
 
 const footerLinks = {
  "For Campaigners": [
@@ -35,12 +35,9 @@ export function Footer() {
  <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
  <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
  <div className="col-span-2 md:col-span-1">
- <Link href="/" className="flex items-center gap-2">
- <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#22c55e]">
- <Heart className="h-5 w-5 text-white" fill="white" />
- </div>
- <span className="text-xl font-bold tracking-tight">FundForward</span>
- </Link>
+  <Link href="/" className="flex items-center">
+  <BrandLogo />
+  </Link>
  <p className="mt-4 text-sm text-gray-500">
  Empowering people to fund what matters. Join millions of generous donors making a difference.
  </p>
@@ -55,7 +52,7 @@ export function Footer() {
  <li key={link.label}>
  <Link
  href={link.href}
- className="text-sm text-gray-500 transition-colors hover:text-[#22c55e]"
+ className="text-sm text-gray-500 transition-colors hover:text-[#CDF88D]"
  >
  {link.label}
  </Link>
@@ -68,7 +65,7 @@ export function Footer() {
  <Separator className="my-8" />
  <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
  <p className="text-sm text-gray-500">
- &copy; {new Date().getFullYear()} FundForward. All rights reserved.
+  &copy; {new Date().getFullYear()} gofundme. All rights reserved.
  </p>
  </div>
  </div>

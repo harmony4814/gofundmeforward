@@ -121,7 +121,7 @@ export default function DashboardSidebar({
  className={cn(
  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
  active
- ? "bg-green-50 text-green-600"
+ ? "bg-[#CDF88D] text-[#CDF88D]"
  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
  )}
  >
@@ -129,7 +129,7 @@ export default function DashboardSidebar({
  className={cn(
  "h-5 w-5 shrink-0",
  active
- ? "text-green-500"
+ ? "text-[#CDF88D]"
  : "text-gray-400"
  )}
  />
@@ -146,7 +146,7 @@ export default function DashboardSidebar({
  )}
  </AnimatePresence>
  {item.label === "Notifications" && !collapsed && (
- <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-green-500 px-1.5 text-[10px] font-bold text-white">
+ <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[#CDF88D] px-1.5 text-[10px] font-bold text-[#14532d]">
  3
  </span>
  )}
@@ -163,7 +163,7 @@ export default function DashboardSidebar({
  className={cn(
  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
  pathname.startsWith("/admin")
- ? "bg-green-50 text-green-600"
+ ? "bg-[#CDF88D] text-[#CDF88D]"
  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
  )}
  >
@@ -171,7 +171,7 @@ export default function DashboardSidebar({
  className={cn(
  "h-5 w-5 shrink-0",
  pathname.startsWith("/admin")
- ? "text-green-500"
+ ? "text-[#CDF88D]"
  : "text-gray-400"
  )}
  />

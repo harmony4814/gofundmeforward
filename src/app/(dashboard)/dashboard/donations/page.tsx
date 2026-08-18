@@ -38,7 +38,7 @@ const DONATIONS = [
 ];
 
 const STATUS_STYLES: Record<string, string> = {
- completed: "bg-green-100 text-green-700",
+ completed: "bg-[#CDF88D] text-[#CDF88D]",
  pending: "bg-amber-100 text-amber-700",
  refunded: "bg-red-100 text-red-700",
  failed: "bg-red-100 text-red-700",

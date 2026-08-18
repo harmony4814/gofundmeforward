@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/select";
 
 const STATUS_STYLES: Record<string, string> = {
-  active: "bg-green-100 text-green-700",
+  active: "bg-[#CDF88D] text-[#CDF88D]",
   pending: "bg-amber-100 text-amber-700",
   completed: "bg-blue-100 text-blue-700",
   rejected: "bg-red-100 text-red-700",
@@ -244,22 +244,22 @@ export default function AdminCampaignsPage() {
       </div>
 
       {createdSlug && (
-        <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+        <div className="rounded-lg border border-[#CDF88D] bg-[#CDF88D] p-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
-                <Check className="h-5 w-5 text-green-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#CDF88D]">
+                <Check className="h-5 w-5 text-[#CDF88D]" />
               </div>
               <div>
-                <p className="font-semibold text-green-900">Campaign created successfully!</p>
-                <p className="text-sm text-green-700">
+                <p className="font-semibold text-[#CDF88D]">Campaign created successfully!</p>
+                <p className="text-sm text-[#CDF88D]">
                   Your campaign is now live and visible on the website.
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Link href={`/campaigns/${createdSlug}`}>
-                <Button variant="outline" size="sm" className="border-green-300 text-green-700 hover:bg-green-100">
+                <Button variant="outline" size="sm" className="border-[#CDF88D] text-[#CDF88D] hover:bg-[#CDF88D]">
                   <Eye className="mr-1 h-4 w-4" />
                   View Campaign
                 </Button>
@@ -267,7 +267,7 @@ export default function AdminCampaignsPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-green-300 text-green-700 hover:bg-green-100"
+                className="border-[#CDF88D] text-[#CDF88D] hover:bg-[#CDF88D]"
                 onClick={() => {
                   const url = `${window.location.origin}/campaigns/${createdSlug}`;
                   if (navigator.share) {
@@ -442,7 +442,7 @@ export default function AdminCampaignsPage() {
                 <button
                   type="button"
                   onClick={() => coverInputRef.current?.click()}
-                  className="flex h-40 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#22c55e] hover:bg-[#22c55e]/5"
+                  className="flex h-40 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#CDF88D] hover:bg-[#CDF88D]/5"
                 >
                   <Upload className="h-8 w-8 text-gray-400" />
                   <p className="mt-2 text-sm font-medium">
@@ -495,7 +495,7 @@ export default function AdminCampaignsPage() {
                     <button
                       type="button"
                       onClick={() => galleryInputRef.current?.click()}
-                      className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors hover:border-[#22c55e] hover:bg-[#22c55e]/5"
+                      className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors hover:border-[#CDF88D] hover:bg-[#CDF88D]/5"
                     >
                       <ImageIcon className="h-6 w-6 text-gray-400" />
                       <span className="mt-1 text-[10px] text-gray-500">
@@ -509,7 +509,7 @@ export default function AdminCampaignsPage() {
                 <button
                   type="button"
                   onClick={() => galleryInputRef.current?.click()}
-                  className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#22c55e] hover:bg-[#22c55e]/5"
+                  className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed transition-colors hover:border-[#CDF88D] hover:bg-[#CDF88D]/5"
                 >
                   <ImageIcon className="h-8 w-8 text-gray-400" />
                   <p className="mt-2 text-sm font-medium">
@@ -659,7 +659,7 @@ export default function AdminCampaignsPage() {
                               size="icon-sm"
                               onClick={() => saveEditing(campaign.id)}
                             >
-                              <Save className="h-4 w-4 text-green-600" />
+                              <Save className="h-4 w-4 text-[#CDF88D]" />
                             </Button>
                             <Button
                               variant="ghost"
@@ -685,7 +685,7 @@ export default function AdminCampaignsPage() {
                                         handleApprove(campaign.id)
                                       }
                                     >
-                                      <Check className="h-4 w-4 text-green-600" />
+                                      <Check className="h-4 w-4 text-[#CDF88D]" />
                                       Approve
                                     </DropdownMenuItem>
                                     <DropdownMenuItem

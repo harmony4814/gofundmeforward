@@ -94,10 +94,10 @@ function SearchPageContent() {
 
  return (
  <div className="min-h-screen">
- <section className="bg-gradient-to-br from-[#052e16] via-[#14532d] to-[#166534] py-16">
+ <section className="bg-gradient-to-br from-[#CDF88D] via-[#CDF88D] to-[#CDF88D] py-16">
  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
- <BadgeComponent className="mb-6 border-[#22c55e]/30 bg-[#22c55e]/10 text-[#22c55e]">
+ <BadgeComponent className="mb-6 border-[#CDF88D]/30 bg-[#CDF88D]/10 text-[#CDF88D]">
  <SearchIcon className="mr-1 h-3 w-3" />
  Search
  </BadgeComponent>
@@ -113,7 +113,7 @@ function SearchPageContent() {
  setPage(1)
  }}
  placeholder="Search campaigns, categories, tags..."
- className="h-14 rounded-2xl border-0 bg-white pl-12 text-base shadow-xl focus-visible:ring-2 focus-visible:ring-[#22c55e]"
+ className="h-14 rounded-2xl border-0 bg-white pl-12 text-base shadow-xl focus-visible:ring-2 focus-visible:ring-[#CDF88D]"
  />
  </div>
  </motion.div>
@@ -130,7 +130,7 @@ function SearchPageContent() {
  <h3 className="font-semibold">Filters</h3>
  <button
  onClick={clearFilters}
- className="text-xs text-[#22c55e] hover:underline"
+ className="text-xs text-[#CDF88D] hover:underline"
  >
  Clear All
  </button>
@@ -278,7 +278,7 @@ function SearchPageContent() {
  key={p}
  variant={p === page ? "default" : "outline"}
  size="icon"
- className={p === page ? "bg-[#22c55e] text-white hover:bg-[#16a34a]" : ""}
+ className={p === page ? "bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]" : ""}
  onClick={() => setPage(p)}
  >
  {p}

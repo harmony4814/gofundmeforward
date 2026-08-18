@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Heart, Mail, Loader2, CheckCircle } from "lucide-react"
+import { Mail, Loader2, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { BrandLogo } from "@/components/shared/BrandLogo"
 
 export default function VerifyEmailPage() {
  const [resending, setResending] = useState(false)
@@ -21,18 +22,15 @@ export default function VerifyEmailPage() {
  <div className="flex min-h-screen items-center justify-center px-4">
  <div className="w-full max-w-md">
  <div className="mb-8 text-center">
- <Link href="/" className="inline-flex items-center gap-2">
- <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22c55e]">
- <Heart className="h-5 w-5 text-white" fill="white" />
- </div>
- <span className="text-xl font-bold">FundForward</span>
+ <Link href="/" className="inline-flex items-center">
+ <BrandLogo />
  </Link>
  </div>
 
  <Card>
  <CardContent className="flex flex-col items-center p-8 text-center">
- <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#22c55e]/10">
- <Mail className="h-8 w-8 text-[#22c55e]" />
+ <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#CDF88D]/10">
+ <Mail className="h-8 w-8 text-[#CDF88D]" />
  </div>
  <h2 className="mt-6 text-2xl font-bold">Check Your Email</h2>
  <p className="mt-3 text-gray-500">
@@ -57,7 +55,7 @@ export default function VerifyEmailPage() {
  {resent ? "Email Sent!" : "Resend Verification Email"}
  </Button>
  <Link href="/login">
- <Button className="w-full bg-[#22c55e] text-white hover:bg-[#16a34a]">
+ <Button className="w-full bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]">
  Back to Login
  </Button>
  </Link>

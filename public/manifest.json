@@ -1,11 +1,11 @@
 {
-  "name": "FundRise - Crowdfunding Platform",
-  "short_name": "FundRise",
+  "name": "gofundme - Crowdfunding Platform",
+  "short_name": "gofundme",
   "description": "Help people fund what matters",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#22c55e",
+  "theme_color": "#CDF88D",
   "orientation": "portrait-primary",
   "icons": [
     {

@@ -128,13 +128,13 @@ export function RelatedCampaigns({
                   </div>
 
                   <CardContent className="p-4 space-y-3">
-                    <h3 className="font-semibold line-clamp-2 text-sm leading-snug group-hover:text-green-600 transition-colors">
+                    <h3 className="font-semibold line-clamp-2 text-sm leading-snug group-hover:text-[#CDF88D] transition-colors">
                       {campaign.title}
                     </h3>
 
                     <div className="space-y-2">
                       <div className="flex items-baseline justify-between text-xs">
-                        <span className="font-semibold text-green-600">
+                        <span className="font-semibold text-[#CDF88D]">
                           {formatCurrency(campaign.raised, campaign.currency || "USD")}
                         </span>
                         <span className="text-muted-foreground">

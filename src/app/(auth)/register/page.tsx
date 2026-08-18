@@ -6,12 +6,13 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { Heart, Eye, EyeOff, Loader2, Check, AlertCircle } from "lucide-react"
+import { Eye, EyeOff, Loader2, Check, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { BrandLogo } from "@/components/shared/BrandLogo"
 import { useAuthStore } from "@/store/auth-store"
 
 const registerSchema = z
@@ -48,8 +49,8 @@ const strengthColors = [
  "bg-red-500",
  "bg-orange-500",
  "bg-yellow-500",
- "bg-lime-500",
- "bg-[#22c55e]",
+ "bg-[#CDF88D]",
+ "bg-[#CDF88D]",
 ]
 
 export default function RegisterPage() {
@@ -87,16 +88,14 @@ export default function RegisterPage() {
 
  return (
   <div className="flex min-h-screen">
-   <div className="hidden w-1/2 bg-gradient-to-br from-[#052e16] via-[#14532d] to-[#166534] lg:flex lg:flex-col lg:items-center lg:justify-center">
-    <div className="max-w-md px-8 text-center">
-     <Link href="/" className="inline-flex items-center gap-2">
-      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#22c55e]">
-       <Heart className="h-7 w-7 text-white" fill="white" />
-      </div>
-     </Link>
-     <h1 className="mt-6 text-3xl font-bold text-white">
-      Join FundForward
-     </h1>
+   <div className="hidden w-1/2 bg-gradient-to-br from-[#CDF88D] via-[#CDF88D] to-[#CDF88D] lg:flex lg:flex-col lg:items-center lg:justify-center">
+     <div className="max-w-md px-8 text-center">
+      <Link href="/" className="inline-flex items-center">
+       <BrandLogo className="h-10 w-auto" />
+      </Link>
+      <h1 className="mt-6 text-3xl font-bold text-white">
+       Join gofundme
+      </h1>
      <p className="mt-4 text-lg text-gray-300">
       Create your account and start making a difference today.
      </p>
@@ -108,8 +107,8 @@ export default function RegisterPage() {
        "Secure payment processing",
       ].map((item) => (
        <div key={item} className="flex items-center gap-3 text-white">
-        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#22c55e]/20">
-         <Check className="h-3.5 w-3.5 text-[#22c55e]" />
+        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#CDF88D]/20">
+         <Check className="h-3.5 w-3.5 text-[#CDF88D]" />
         </div>
         <span className="text-sm">{item}</span>
        </div>
@@ -120,14 +119,11 @@ export default function RegisterPage() {
 
    <div className="flex flex-1 items-center justify-center px-4 sm:px-6 lg:px-8">
     <div className="w-full max-w-md">
-     <div className="mb-8 text-center lg:hidden">
-      <Link href="/" className="inline-flex items-center gap-2">
-       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22c55e]">
-        <Heart className="h-5 w-5 text-white" fill="white" />
-       </div>
-       <span className="text-xl font-bold">FundForward</span>
-      </Link>
-     </div>
+      <div className="mb-8 text-center lg:hidden">
+       <Link href="/" className="inline-flex items-center">
+        <BrandLogo />
+       </Link>
+      </div>
 
      <h2 className="text-2xl font-bold tracking-tight">Create Account</h2>
      <p className="mt-2 text-sm text-gray-500">
@@ -235,16 +231,16 @@ export default function RegisterPage() {
          <input
           type="checkbox"
           id="terms"
-          className="mt-0.5 h-4 w-4 rounded border-gray-300 accent-[#22c55e]"
+          className="mt-0.5 h-4 w-4 rounded border-gray-300 accent-[#CDF88D]"
           {...register("terms")}
          />
          <Label htmlFor="terms" className="text-sm font-normal leading-snug">
           I agree to the{" "}
-          <Link href="/faq" className="text-[#22c55e] hover:underline">
+          <Link href="/faq" className="text-[#CDF88D] hover:underline">
            Terms of Service
           </Link>{" "}
           and{" "}
-          <Link href="/faq" className="text-[#22c55e] hover:underline">
+          <Link href="/faq" className="text-[#CDF88D] hover:underline">
            Privacy Policy
           </Link>
          </Label>
@@ -255,7 +251,7 @@ export default function RegisterPage() {
 
         <Button
          type="submit"
-         className="w-full bg-[#22c55e] text-white hover:bg-[#16a34a]"
+         className="w-full bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]"
          size="lg"
          disabled={isLoading}
         >
@@ -302,7 +298,7 @@ export default function RegisterPage() {
       Already have an account?{" "}
       <Link
        href="/login"
-       className="font-semibold text-[#22c55e] hover:underline"
+       className="font-semibold text-[#CDF88D] hover:underline"
       >
        Sign In
       </Link>

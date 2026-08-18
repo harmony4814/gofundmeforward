@@ -6,12 +6,13 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { Heart, Eye, EyeOff, Loader2, AlertCircle } from "lucide-react"
+import { Eye, EyeOff, Loader2, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { BrandLogo } from "@/components/shared/BrandLogo"
 import { useAuthStore } from "@/store/auth-store"
 
 const loginSchema = z.object({
@@ -57,16 +58,14 @@ function LoginFormComponent() {
 
  return (
   <div className="flex min-h-screen">
-   <div className="hidden w-1/2 bg-gradient-to-br from-[#052e16] via-[#14532d] to-[#166534] lg:flex lg:flex-col lg:items-center lg:justify-center">
-    <div className="max-w-md px-8 text-center">
-     <Link href="/" className="inline-flex items-center gap-2">
-      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#22c55e]">
-       <Heart className="h-7 w-7 text-white" fill="white" />
-      </div>
-     </Link>
-     <h1 className="mt-6 text-3xl font-bold text-white">
-      Welcome to FundForward
-     </h1>
+   <div className="hidden w-1/2 bg-gradient-to-br from-[#CDF88D] via-[#CDF88D] to-[#CDF88D] lg:flex lg:flex-col lg:items-center lg:justify-center">
+     <div className="max-w-md px-8 text-center">
+      <Link href="/" className="inline-flex items-center">
+       <BrandLogo className="h-10 w-auto" />
+      </Link>
+      <h1 className="mt-6 text-3xl font-bold text-white">
+       Welcome to gofundme
+      </h1>
      <p className="mt-4 text-lg text-gray-300">
       Join millions of people who are making a difference through the power of
       community and generosity.
@@ -78,7 +77,7 @@ function LoginFormComponent() {
        { value: "200+", label: "Countries" },
       ].map((stat) => (
        <div key={stat.label}>
-        <div className="text-2xl font-bold text-[#22c55e]">{stat.value}</div>
+        <div className="text-2xl font-bold text-[#CDF88D]">{stat.value}</div>
         <div className="text-sm text-gray-400">{stat.label}</div>
        </div>
       ))}
@@ -88,14 +87,11 @@ function LoginFormComponent() {
 
    <div className="flex flex-1 items-center justify-center px-4 sm:px-6 lg:px-8">
     <div className="w-full max-w-md">
-     <div className="mb-8 text-center lg:hidden">
-      <Link href="/" className="inline-flex items-center gap-2">
-       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22c55e]">
-        <Heart className="h-5 w-5 text-white" fill="white" />
-       </div>
-       <span className="text-xl font-bold">FundForward</span>
-      </Link>
-     </div>
+      <div className="mb-8 text-center lg:hidden">
+       <Link href="/" className="inline-flex items-center">
+        <BrandLogo />
+       </Link>
+      </div>
 
      <h2 className="text-2xl font-bold tracking-tight">Welcome Back</h2>
      <p className="mt-2 text-sm text-gray-500">
@@ -129,7 +125,7 @@ function LoginFormComponent() {
           <Label htmlFor="password">Password</Label>
           <Link
            href="/forgot-password"
-           className="text-xs text-[#22c55e] hover:underline"
+           className="text-xs text-[#CDF88D] hover:underline"
           >
            Forgot Password?
           </Link>
@@ -160,7 +156,7 @@ function LoginFormComponent() {
 
         <Button
          type="submit"
-         className="w-full bg-[#22c55e] text-white hover:bg-[#16a34a]"
+         className="w-full bg-[#CDF88D] text-[#14532d] hover:bg-[#CDF88D]"
          size="lg"
          disabled={isLoading}
         >
@@ -207,7 +203,7 @@ function LoginFormComponent() {
       Don&apos;t have an account?{" "}
       <Link
        href="/register"
-       className="font-semibold text-[#22c55e] hover:underline"
+       className="font-semibold text-[#CDF88D] hover:underline"
       >
        Sign Up
       </Link>
@@ -220,7 +216,7 @@ function LoginFormComponent() {
 
 export default function LoginPage() {
  return (
-  <Suspense fallback={<div className="flex min-h-screen items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-[#22c55e]" /></div>}>
+  <Suspense fallback={<div className="flex min-h-screen items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-[#CDF88D]" /></div>}>
    <LoginFormComponent />
   </Suspense>
  )

@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fundrise.com"
-const SITE_NAME = "FundRise"
-const DEFAULT_DESCRIPTION = "Help people fund what matters. Start or support crowdfunding campaigns on FundRise."
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://gofundme.com"
+const SITE_NAME = "gofundme"
+const DEFAULT_DESCRIPTION = "Help people fund what matters. Start or support crowdfunding campaigns on gofundme."
 
 export function generateMetadata(
   title: string,
@@ -125,14 +125,14 @@ export function generateOrganizationSchema() {
     logo: `${SITE_URL}/logo.png`,
     description: DEFAULT_DESCRIPTION,
     sameAs: [
-      "https://twitter.com/fundrise",
-      "https://facebook.com/fundrise",
-      "https://instagram.com/fundrise",
+      "https://twitter.com/gofundme",
+      "https://facebook.com/gofundme",
+      "https://instagram.com/gofundme",
     ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: "support@fundrise.com",
+      email: "support@gofundme.com",
     },
   }
 }

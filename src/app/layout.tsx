@@ -22,10 +22,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "FundRise - Crowdfunding Platform",
-    template: "%s | FundRise",
+    default: "gofundme - Crowdfunding Platform",
+    template: "%s | gofundme",
   },
-  description: "Help people fund what matters. Start or support crowdfunding campaigns on FundRise.",
+  description: "Help people fund what matters. Start or support crowdfunding campaigns on gofundme.",
   keywords: [
     "crowdfunding",
     "donation",
@@ -35,18 +35,18 @@ export const metadata: Metadata = {
     "help others",
     "community funding",
   ],
-  authors: [{ name: "FundRise" }],
+  authors: [{ name: "gofundme" }],
   openGraph: {
-    title: "FundRise - Crowdfunding Platform",
-    description: "Help people fund what matters. Start or support crowdfunding campaigns on FundRise.",
-    url: "https://fundrise.com",
-    siteName: "FundRise",
+    title: "gofundme - Crowdfunding Platform",
+    description: "Help people fund what matters. Start or support crowdfunding campaigns on gofundme.",
+    url: "https://gofundme.com",
+    siteName: "gofundme",
     images: [
       {
         url: "/og-default.png",
         width: 1200,
         height: 630,
-        alt: "FundRise Crowdfunding Platform",
+        alt: "gofundme Crowdfunding Platform",
       },
     ],
     locale: "en_US",
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FundRise - Crowdfunding Platform",
-    description: "Help people fund what matters. Start or support crowdfunding campaigns on FundRise.",
+    title: "gofundme - Crowdfunding Platform",
+    description: "Help people fund what matters. Start or support crowdfunding campaigns on gofundme.",
     images: ["/og-default.png"],
   },
   manifest: "/manifest.json",
@@ -83,7 +83,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} h-full scroll-smooth antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans">
